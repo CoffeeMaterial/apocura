@@ -353,7 +353,7 @@ body.v-lock{overflow:hidden}
         <div class="vcard">
           <b>Ditt videobesök</b>
           <span class="t" id="heroTime">Videobesök · 30 min</span>
-          <span class="tag">Tid väljs efter betalning</span>
+          <span class="tag">Tid och betalning i en bokning</span>
         </div>
       </div>
     </div>
@@ -474,7 +474,7 @@ body.v-lock{overflow:hidden}
       </div>
       <ol class="steps">
         <li><span class="n">Steg 1</span><h3>Välj och kolla</h3><p class="muted">Välj tjänst och gör en kort kontroll. Vid viktbedömning ser du direkt om det kan vara aktuellt. Dina svar sparas inte.</p></li>
-        <li><span class="n">Steg 2</span><h3>Boka och betala</h3><p class="muted">Du ser priset innan du betalar. Direkt efter betalningen väljer du en ledig tid och får en bekräftelse med videolänk på e-post.</p></li>
+        <li><span class="n">Steg 2</span><h3>Boka och betala</h3><p class="muted">Du ser priset innan du betalar. Du väljer en ledig tid och betalar i samma bokning, och får en bekräftelse med videolänk på e-post.</p></li>
         <li><span class="n">Steg 3</span><h3>Träffa läkaren</h3><p class="muted">Ni möts på video, eller på mottagningen när undersökningen kräver det. Läkaren går igenom din hälsa och gör en medicinsk bedömning.</p></li>
         <li><span class="n">Steg 4</span><h3>Få en plan</h3><p class="muted">Beroende på bedömningen kan det bli recept, intyg, uppföljning eller råd om var du bör söka vård.</p></li>
       </ol>
@@ -495,7 +495,7 @@ body.v-lock{overflow:hidden}
           <h4>Välj tjänst och tid</h4>
           <div class="v-row v-sel"><span>Viktbedömning</span><b>795 kr</b></div>
           <div class="v-row"><span>Sjukintyg</span><b>495 kr</b></div>
-          <div class="v-row v-pop v-d1"><span>Välj ledig tid</span><span>efter betalning</span></div>
+          <div class="v-row v-pop v-d1"><span>Välj ledig tid</span><span>vid bokningen</span></div>
           <div class="v-btn v-pulse v-pop v-d2">Betala och boka</div>
         </div>
       </div>
@@ -657,7 +657,7 @@ body.v-lock{overflow:hidden}
         <ol class="stepper" id="stepper">
           <li data-s="service">1. Tjänst</li>
           <li data-s="check">2. Kontroll</li>
-          <li data-s="pay">3. Betalning</li>
+          <li data-s="pay">3. Tid och betalning</li>
         </ol>
 
         <div class="panel" id="w-service">
@@ -751,9 +751,9 @@ body.v-lock{overflow:hidden}
         </div>
 
         <div class="panel" id="w-pay" hidden>
-          <h3 id="payTitle">Betalning</h3>
+          <h3 id="payTitle">Välj tid och betala</h3>
           <p class="muted" id="payPlace" hidden>Undersökningen sker på mottagningen: [adress, fylls i före publicering].</p>
-          <p class="muted" id="timeNote">Du väljer tid direkt efter betalningen. Du är bokad först när du har valt en tid och fått bekräftelse på e-post.</p>
+          <p class="muted" id="timeNote">Nästa steg: du väljer dag och tid och betalar i samma bokning. Tiden är bokad först när betalningen gått igenom, och då får du en bekräftelse med videolänk på e-post.</p>
           <p class="muted" id="concNote" hidden>När du är medlem får du en länk för att boka ditt första videobesök. Medlemskapet förnyas varje månad tills du säger upp det.</p>
           <p class="muted" id="subRow">Priset gäller bedömningen. Uppföljning ingår inte och bestäms först efter besöket. Den kostar 399 kr per månad, är frivillig och har ingen bindningstid.</p>
           <div class="checks">
@@ -883,6 +883,7 @@ const LINKS = {
   jour: "https://book.stripe.com/test_5kQ9AVdhB6WY1Cj9hGbAs04",
   conc: "https://buy.stripe.com/test_5kQcN77Xhftu2GndxWbAs05"
 };
+const CAL = { vikt:"https://cal.com/daniel-mira-1u9adr/viktbedomning", intyg:"https://cal.com/daniel-mira-1u9adr/sjukintyg", jour:"https://cal.com/daniel-mira-1u9adr/journalgenomgang" };
 const PRICE = { vikt: 795, intyg: 495, kort: 995, jour: 2500, conc: 3000 };
 const W = { service: null, step: "service", result: null };
 
@@ -938,11 +939,11 @@ function pick(service) {
 }
 function preparePay() {
   const v = W.service === "vikt";
-  const T = { vikt: "Betala för viktbedömning", intyg: "Betala för sjukintyg", kort: "Betala för undersökning på plats", jour: "Betala för journalgenomgång", conc: "Bli medlem i läkarconcierge" };
+  const T = { vikt: "Boka och betala viktbedömning", intyg: "Boka och betala sjukintyg", kort: "Betala för undersökning på plats", jour: "Boka och betala journalgenomgång", conc: "Bli medlem i läkarconcierge" };
   $("payTitle").textContent = T[W.service];
   $("subRow").hidden = !v;
   $("payPlace").hidden = W.service !== "kort";
-  $("timeNote").hidden = W.service === "conc";
+  $("timeNote").hidden = W.service === "conc" || W.service === "kort";
   $("concNote").hidden = W.service !== "conc";
   updateTotal(); updatePay();
 }
@@ -1017,6 +1018,7 @@ function payRef() {
   return W.service + "-" + Date.now().toString(36);
 }
 function payHref() {
+  if (CAL[W.service]) return CAL[W.service];
   const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : W.service === "conc" ? LINKS.conc : LINKS.start;
   return base + "?client_reference_id=" + payRef();
 }
@@ -1032,13 +1034,14 @@ function updatePay() {
   const a = $("btnPay");
   a.setAttribute("aria-disabled", String(!payOk()));
   a.href = payOk() ? payHref() : "#boka";
+  a.textContent = CAL[W.service] ? "Välj tid och betala" : (W.service === "kort" ? "Betala med Stripe" : "Betala med Stripe");
 }
 ["c1", "c2"].forEach((id) => $(id).addEventListener("change", () => { updateTotal(); updatePay(); }));
 $("btnPay").addEventListener("click", (e) => {
   if (!payOk()) { e.preventDefault(); $("payMsg").textContent = "Godkänn båda rutorna först."; return; }
   $("payMsg").textContent = W.service === "conc"
     ? "Betalningen sker på Stripes sida i en ny flik. Medlemskapet förnyas varje månad tills du säger upp det."
-    : "Betalningen sker på Stripes sida i en ny flik. Efter betalningen kommer du till sidan där du väljer tid. Du är bokad först när du har valt en tid.";
+    : (CAL[W.service] ? "Bokningen öppnas i en ny flik. Välj dag och tid och betala där. Du är bokad först när betalningen gått igenom." : "Betalningen sker på Stripes sida i en ny flik. Tid för undersökningen bokar vi tillsammans efter betalningen.");
 });
 
 show("service");
