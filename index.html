@@ -562,23 +562,23 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         </div>
 
         <div class="panel" id="w-check-vikt" hidden>
-          <h3>Kolla om en viktbedömning kan vara aktuell</h3>
-          <p class="muted">Dina svar sparas inte och skickas inte någonstans. Läkaren går igenom allt med dig vid besöket.</p>
+          <h3>Kontrollera om en viktbedömning passar dig</h3>
+          <p class="muted">Dina svar sparas inte och skickas inte någonstans. Läkaren går igenom allt med dig under besöket.</p>
           <div class="grid">
-            <div class="field"><label for="sex">Kön (för midjegräns)</label><select id="sex"><option value="kvinna">Kvinna</option><option value="man">Man</option></select></div>
+            <div class="field"><label for="sex">Kön (för att bedöma midjeomfånget)</label><select id="sex"><option value="kvinna">Kvinna</option><option value="man">Man</option></select></div>
             <div class="field"><label for="age">Ålder (år)</label><input type="number" id="age" inputmode="numeric" min="0" max="120"></div>
             <div class="field"><label for="height">Längd (cm)</label><input type="number" id="height" inputmode="decimal"></div>
             <div class="field"><label for="weight">Vikt (kg)</label><input type="number" id="weight" inputmode="decimal"></div>
             <div class="field"><label for="waist">Midjeomfång (cm)</label><input type="number" id="waist" inputmode="decimal"></div>
           </div>
           <p>BMI: <b class="num" id="bmiOut">–</b></p>
-          <fieldset><legend>Följdsjukdomar</legend><div class="checks" id="g-comorb"></div></fieldset>
-          <fieldset><legend>Kryssa i om något stämmer</legend><div class="checks" id="g-excl"></div></fieldset>
-          <fieldset><legend>Kryssa i om något stämmer, läkaren tittar då extra</legend><div class="checks" id="g-review"></div></fieldset>
-          <fieldset><legend>Kryssa i det som stämmer</legend><div class="checks" id="g-scoff"></div></fieldset>
-          <label class="chk"><input type="checkbox" id="selfharm"><span>Jag har under de senaste veckorna haft tankar på att skada mig själv eller på att inte vilja leva.</span></label>
+          <fieldset><legend>Kryssa i de sjukdomar du har</legend><div class="checks" id="g-comorb"></div></fieldset>
+          <fieldset><legend>Kryssa i om något av detta stämmer för dig</legend><div class="checks" id="g-excl"></div></fieldset>
+          <fieldset><legend>Kryssa i om något av detta stämmer. Läkaren tittar då extra på det.</legend><div class="checks" id="g-review"></div></fieldset>
+          <fieldset><legend>Kryssa i de frågor där du svarar ja</legend><div class="checks" id="g-scoff"></div></fieldset>
+          <label class="chk"><input type="checkbox" id="selfharm"><span>Jag har de senaste veckorna haft tankar på att skada mig själv eller på att inte vilja leva.</span></label>
           <div class="row">
-            <button class="btn" id="btnEval" type="button">Kolla</button>
+            <button class="btn" id="btnEval" type="button">Kontrollera</button>
             <button class="btn alt" data-back type="button">Byt tjänst</button>
           </div>
           <div id="resultBox" hidden aria-live="polite">
@@ -662,20 +662,20 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => Math.round(n).toLocaleString("sv-SE");
 
-const COMORB = { hypertoni: "Högt blodtryck", typ2: "Typ 2-diabetes eller förstadium", somnapne: "Sömnapné", blodfetter: "Förhöjda blodfetter" };
+const COMORB = { hypertoni: "Högt blodtryck", typ2: "Typ 2-diabetes eller prediabetes (förstadium)", somnapne: "Sömnapné", blodfetter: "Förhöjda blodfetter" };
 const EXCL = {
-  gravid: "Jag är gravid, planerar graviditet eller ammar",
-  mtc: "Medullär sköldkörtelcancer eller MEN2 hos mig eller i släkten",
+  gravid: "Jag är gravid, försöker bli gravid eller ammar",
+  mtc: "Medullär sköldkörtelcancer eller MEN2 hos mig själv eller i min släkt",
   allergi: "Jag har haft en allergisk reaktion mot ett läkemedel för viktminskning",
   annatglp: "Jag använder redan ett läkemedel för viktminskning"
 };
 const REVIEW = {
-  pankreatit: "Tidigare pankreatit",
+  pankreatit: "Tidigare inflammation i bukspottkörteln (pankreatit)",
   gallsten: "Gallsten",
-  mag: "Allvarlig mag-tarmsjukdom, till exempel gastropares eller IBD",
-  insulin: "Jag använder insulin eller sulfonureid",
-  retinopati: "Diabetesretinopati",
-  depression: "Depression eller annan psykisk ohälsa som behandlas"
+  mag: "Allvarlig mag-tarmsjukdom, till exempel förlamad magsäck (gastropares) eller inflammatorisk tarmsjukdom (IBD)",
+  insulin: "Jag använder insulin eller diabetesläkemedel som kan ge lågt blodsocker (sulfonureider)",
+  retinopati: "Ögonskada av diabetes (diabetesretinopati)",
+  depression: "Depression eller annan psykisk ohälsa som jag får behandling för"
 };
 const SCOFF = [
   "Gör du dig själv kräkas när du känner dig obehagligt mätt?",
@@ -698,26 +698,26 @@ function triage(d) {
     return { level: "akut", bmi, reasons };
   }
   if (bmi === null || d.age === null) {
-    R("review", "Ålder, längd och vikt saknas, så BMI kan inte beräknas.");
+    R("review", "Ålder, längd eller vikt saknas, så BMI kan inte räknas ut.");
     return { level: "review", bmi, reasons };
   }
-  if (d.age < 18) R("reject", "Under 18 år.");
+  if (d.age < 18) R("reject", "Du är under 18 år.");
   for (const k of d.excl) R("reject", EXCL[k]);
   const waistHigh = d.waist !== null && ((d.sex === "kvinna" && d.waist > 88) || (d.sex === "man" && d.waist > 102));
   const co = d.comorb.length;
   if (bmi >= 35) {
     /* uppfyller indikation */
   } else if (bmi >= 30) {
-    if (!(waistHigh || co > 0)) R("review", "BMI 30 till 34,9 utan ökat midjeomfång eller följdsjukdom. Läkaren avgör vid besöket.");
+    if (!(waistHigh || co > 0)) R("review", "BMI 30 till 34,9 utan ökat midjeomfång eller följdsjukdom. Läkaren avgör under besöket.");
   } else if (bmi >= 27) {
-    if (co > 0) R("review", "BMI 27 till 29,9 med följdsjukdom. Läkaren avgör vid besöket.");
+    if (co > 0) R("review", "BMI 27 till 29,9 med följdsjukdom. Läkaren avgör under besöket.");
     else R("reject", "BMI 27 till 29,9 utan följdsjukdom.");
   } else {
     R("reject", "BMI under 27.");
   }
   for (const k of d.review) R("review", REVIEW[k]);
-  if (d.scoff >= 2) R("review", d.scoff + " av 5 svar om ätbeteende. Läkaren går igenom det med dig.");
-  if (d.age >= 75) R("review", "Ålder 75 år eller äldre.");
+  if (d.scoff >= 2) R("review", "Du svarade ja på " + d.scoff + " av 5 frågor om ätbeteende. Läkaren går igenom det med dig.");
+  if (d.age >= 75) R("review", "Du är 75 år eller äldre.");
   return { level: lv, bmi, reasons };
 }
 //</triage>
@@ -834,10 +834,10 @@ function evaluate() {
   box.append(pill);
   if (r.bmi) { const b = document.createElement("p"); b.className = "num"; b.textContent = "BMI " + r.bmi.toFixed(1).replace(".", ","); box.append(b); }
   const msg = document.createElement("p");
-  if (r.level === "akut") msg.textContent = "Det du skrev är viktigt. Ring 112 om du är i akut fara. Du kan också ringa 1177 eller Självmordslinjen på 90101. Du går inte vidare i bokningen nu, men du ska få hjälp.";
-  else if (r.level === "reject") msg.textContent = "Enligt dina svar kan vi tyvärr inte erbjuda en viktbedömning via nätet. Din vårdcentral eller 1177 kan bedöma vad som passar dig.";
-  else if (r.level === "review") msg.textContent = "Du kan boka. Läkaren tittar extra på punkterna nedan och avgör vid besöket.";
-  else msg.textContent = "Dina svar passar en viktbedömning. Läkaren gör den slutliga bedömningen vid besöket.";
+  if (r.level === "akut") msg.textContent = "Det du har svarat är viktigt. Ring 112 om du är i akut fara. Du kan också ringa Självmordslinjen på 90101 eller 1177. Du går inte vidare i bokningen nu, eftersom du kan behöva träffa vården snabbare än vad den här tjänsten kan erbjuda.";
+  else if (r.level === "reject") msg.textContent = "Enligt dina svar kan vi tyvärr inte erbjuda en viktbedömning på distans. Din vårdcentral eller 1177 kan hjälpa dig vidare.";
+  else if (r.level === "review") msg.textContent = "Du kan boka. Läkaren tittar extra på punkterna nedan och avgör sedan under besöket vad som är lämpligt.";
+  else msg.textContent = "Dina svar passar en viktbedömning. Läkaren gör den slutliga bedömningen under besöket.";
   box.append(msg);
   if (r.reasons.length) {
     const ul = document.createElement("ul"); ul.className = "plain";
