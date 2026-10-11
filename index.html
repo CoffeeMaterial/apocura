@@ -108,6 +108,12 @@ section.s { padding-block: 56px; }
 .svcs { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
 @media (min-width: 700px) { .svcs { grid-template-columns: repeat(2, 1fr); } }
 .svc { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.svc.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; background: var(--primary-soft); }
+.svc.wide .eyebrow { margin: 0 0 6px; }
+.svc.wide h3 { margin-bottom: 8px; }
+.svc.wide .price { margin-top: 12px; }
+.svc.wide .btn { margin-top: 12px; }
+@media (max-width: 699px) { .svc.wide { grid-template-columns: 1fr; } }
 .notinc { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
 .svc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .svc li, .tick li { padding-left: 26px; position: relative; }
@@ -320,7 +326,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Tjänster</p>
-        <h2>Fyra tjänster med fast pris</h2>
+        <h2>Våra tjänster, med fast pris</h2>
       </div>
       <div class="svcs">
         <article class="svc">
@@ -374,6 +380,24 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
           <p class="notinc">Ingår inte: ny behandling, recept, sjukskrivning eller ny diagnos.</p>
           <p class="price num">2 500 kr <small>per timme</small></p>
           <a class="btn" href="#boka" data-pick="jour">Boka journalgenomgång</a>
+        </article>
+        <article class="svc wide">
+          <div>
+            <p class="eyebrow">Medlemskap</p>
+            <h3>Läkarconcierge</h3>
+            <p class="muted">Din egen läkare att höra av dig till när du undrar över något, utan att behöva boka ett nytt besök varje gång. Du betalar en fast summa per månad och kan säga upp när du vill.</p>
+            <p class="price num">3 000 kr <small>per månad</small></p>
+            <a class="btn" href="#boka" data-pick="conc">Bli medlem</a>
+          </div>
+          <div>
+            <ul>
+              <li>Direktkontakt med läkare via säker chat, med svar inom en arbetsdag</li>
+              <li>Ett videobesök på upp till 30 minuter varje månad</li>
+              <li>Medicinsk bedömning och råd, och recept om läkaren bedömer att det är lämpligt</li>
+              <li>Ingen bindningstid, du säger upp när du vill</li>
+            </ul>
+            <p class="notinc">Ingår inte: akut vård (ring 112), hembesök, läkemedel som betalas på apotek, provtagning, och intyg, som har eget pris. Läkaren kan inte ersätta en akutmottagning eller din vårdcentral vid allvarliga besvär.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -508,6 +532,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         <li><div><b>Bedömning för sjukintyg</b><p class="d">Videobesök, 20 minuter</p></div><span class="p num">495 kr</span></li>
         <li><div><b>Läkarintyg för körkort, högre behörighet</b><p class="d">Undersökning på plats med hälsoundersökning och syntest</p></div><span class="p num">995 kr</span></li>
         <li><div><b>Journalgenomgång och förklaring</b><p class="d">Videobesök, 60 minuter</p></div><span class="p num">2 500 kr</span></li>
+        <li><div><b>Läkarconcierge, medlemskap</b><p class="d">Chat med läkare och ett videobesök på upp till 30 minuter varje månad. Ingen bindningstid.</p></div><span class="p num">3 000 kr/mån</span></li>
       </ul>
       <p class="note">Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen. Om läkaren bedömer att läkemedel är aktuellt köper du det själv på apotek, och läkaren går igenom kostnaden med dig vid besöket.</p>
     </div>
@@ -539,6 +564,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         <details><summary>Vad kostar läkemedlet?</summary><p>Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen, så du betalar själv på apotek. Kostnaden varierar mellan läkemedel och doser. Läkaren går igenom den med dig.</p></details>
         <details><summary>Hur fungerar ett sjukintyg?</summary><p>Läkaren bedömer din arbetsförmåga utifrån vad som framkommer vid videobesöket och avgör om ett intyg kan utfärdas. Behöver du träffas fysiskt eller söka annan vård får du veta det.</p></details>
         <details><summary>Behöver jag läkarintyg för att förlänga min lastbils- eller bussbehörighet?</summary><p>Det beror på din ålder när behörigheten går ut. Är du under 45 år räcker en hälsodeklaration och ett grundläggande synintyg. Från 45 år krävs ett läkarintyg. Intyget får vara högst två månader gammalt när du ansöker. <a href="https://www.transportstyrelsen.se/sv/vagtrafik/Korkort/har-korkort/forlangning-av-hogre-behorigheter/" target="_blank" rel="noopener">Läs mer hos Transportstyrelsen</a>.</p></details>
+        <details><summary>Hur fungerar läkarconcierge?</summary><p>Du är medlem månad för månad. Du kan skriva till läkaren via säker chat och får svar inom en arbetsdag, och du har ett videobesök på upp till 30 minuter varje månad. Det ersätter inte akutvård. Vid akut fara ringer du 112. Medlemskapet förnyas varje månad tills du säger upp det.</p></details>
         <details><summary>Vad ingår i en journalgenomgång?</summary><p>Läkaren förklarar innehållet i din journal: diagnoser, provsvar, läkemedel och medicinska termer. Det är en genomgång och förklaring, inte en ny bedömning, och du får inga recept eller sjukskrivning. Besöket är 60 minuter och kostar 2 500 kr.</p></details>
         <details><summary>Varför sker körkortsundersökningen på plats?</summary><p>Intyget bygger på en grundläggande hälsoundersökning och ett syntest. Det kräver utrustning och en fysisk undersökning, så du bokar ett besök på mottagningen i stället för video.</p></details>
         <details><summary>Kan ni hjälpa vid akuta besvär?</summary><p>Nej. Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p></details>
@@ -567,6 +593,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
             <button class="pick" data-pick="intyg" type="button"><b>Sjukintyg</b><span class="muted num">495 kr, 20 minuter</span></button>
             <button class="pick" data-pick="kort" type="button"><b>Körkortsintyg</b><span class="muted num">995 kr, undersökning på plats</span></button>
             <button class="pick" data-pick="jour" type="button"><b>Journalgenomgång</b><span class="muted num">2 500 kr, 60 minuter</span></button>
+            <button class="pick" data-pick="conc" type="button"><b>Läkarconcierge</b><span class="muted num">3 000 kr per månad</span></button>
           </div>
         </div>
 
@@ -636,10 +663,25 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
           </div>
         </div>
 
+        <div class="panel" id="w-check-conc" hidden>
+          <h3>Innan du blir medlem i läkarconcierge</h3>
+          <p class="muted">Medlemskapet ger dig direktkontakt med läkare via chat och ett videobesök på upp till 30 minuter varje månad. Det kostar 3 000 kr per månad.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="m1"><span>Jag har läst vad som ingår och inte ingår.</span></label>
+            <label class="chk"><input type="checkbox" id="m2"><span>Jag förstår att medlemskapet förnyas varje månad tills jag säger upp det, och att det inte finns någon bindningstid.</span></label>
+            <label class="chk"><input type="checkbox" id="m3"><span>Jag vet att tjänsten inte ersätter akut vård. Vid akut fara ringer jag 112.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnConcNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
         <div class="panel" id="w-pay" hidden>
           <h3 id="payTitle">Välj tid</h3>
           <p class="muted" id="payPlace" hidden>Undersökningen sker på mottagningen: [adress, fylls i före publicering].</p>
           <div class="slots" id="slots"></div>
+          <p class="muted" id="concNote" hidden>Du väljer ingen tid nu. När du är medlem får du en länk för att boka ditt första videobesök. Medlemskapet förnyas varje månad tills du säger upp det.</p>
           <p class="muted" id="subRow">Priset gäller bedömningen. Uppföljning ingår inte och bestäms först efter besöket. Den kostar 399 kr per månad, är frivillig och har ingen bindningstid.</p>
           <div class="checks">
             <label class="chk"><input type="checkbox" id="c1"><span>Jag godkänner att mina uppgifter behandlas för vård enligt patientdatalagen.</span></label>
@@ -736,9 +778,10 @@ const LINKS = {
   start: "https://book.stripe.com/test_5kQfZjdhB1CE1Cj9hGbAs00",
   sjuk: "https://book.stripe.com/test_14AeVf91l8125SzdxWbAs02",
   kort: "https://book.stripe.com/test_4gMcN76Tdgxy6WD65ubAs03",
-  jour: "https://book.stripe.com/test_5kQ9AVdhB6WY1Cj9hGbAs04"
+  jour: "https://book.stripe.com/test_5kQ9AVdhB6WY1Cj9hGbAs04",
+  conc: "https://buy.stripe.com/test_5kQcN77Xhftu2GndxWbAs05"
 };
-const PRICE = { vikt: 795, intyg: 495, kort: 995, jour: 2500 };
+const PRICE = { vikt: 795, intyg: 495, kort: 995, jour: 2500, conc: 3000 };
 const W = { service: null, step: "service", result: null, slot: 1 };
 
 function checkGroup(host, items, name) {
@@ -806,22 +849,25 @@ function show(step) {
   $("w-check-intyg").hidden = !(step === "check" && W.service === "intyg");
   $("w-check-kort").hidden = !(step === "check" && W.service === "kort");
   $("w-check-jour").hidden = !(step === "check" && W.service === "jour");
+  $("w-check-conc").hidden = !(step === "check" && W.service === "conc");
   $("w-pay").hidden = step !== "pay";
   document.querySelectorAll("#stepper li").forEach((li) => li.classList.toggle("on", li.dataset.s === step));
   if (step === "pay") preparePay();
 }
 function pick(service) {
-  if (service !== "vikt" && service !== "intyg" && service !== "kort" && service !== "jour") { return; }
+  if (service !== "vikt" && service !== "intyg" && service !== "kort" && service !== "jour" && service !== "conc") { return; }
   if (W.service !== service) { W.result = null; $("resultBox").hidden = true; $("payMsg").textContent = ""; }
   W.service = service;
   show("check");
 }
 function preparePay() {
   const v = W.service === "vikt";
-  const T = { vikt: "Välj tid för viktbedömning", intyg: "Välj tid för sjukintyg", kort: "Välj tid för undersökning på plats", jour: "Välj tid för journalgenomgång" };
+  const T = { vikt: "Välj tid för viktbedömning", intyg: "Välj tid för sjukintyg", kort: "Välj tid för undersökning på plats", jour: "Välj tid för journalgenomgång", conc: "Bli medlem i läkarconcierge" };
   $("payTitle").textContent = T[W.service];
   $("subRow").hidden = !v;
   $("payPlace").hidden = W.service !== "kort";
+  $("slots").hidden = W.service === "conc";
+  $("concNote").hidden = W.service !== "conc";
   renderSlots(); updateTotal(); updatePay();
 }
 document.querySelectorAll("[data-pick]").forEach((el) => el.addEventListener("click", () => {
@@ -876,21 +922,28 @@ function updateJour() { $("btnJourNext").disabled = !($("j1").checked && $("j2")
 ["j1", "j2"].forEach((id) => $(id).addEventListener("change", updateJour));
 $("btnJourNext").onclick = () => show("pay");
 
+/* Kontroll, läkarconcierge */
+function updateConc() { $("btnConcNext").disabled = !($("m1").checked && $("m2").checked && $("m3").checked); }
+["m1", "m2", "m3"].forEach((id) => $(id).addEventListener("change", updateConc));
+$("btnConcNext").onclick = () => show("pay");
+
 /* Betalning */
 function totalNow() {
   if (W.service === "intyg") return PRICE.intyg;
   if (W.service === "kort") return PRICE.kort;
   if (W.service === "jour") return PRICE.jour;
+  if (W.service === "conc") return PRICE.conc;
   return PRICE.vikt;
 }
 function updateTotal() { $("total").textContent = fmt(totalNow()) + " kr"; }
 function payRef() {
+  if (W.service === "conc") return "conc-medlem";
   const d = SLOTS[W.slot];
   const p = (n) => String(n).padStart(2, "0");
   return W.service + "-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + p(d.getHours()) + p(d.getMinutes());
 }
 function payHref() {
-  const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : LINKS.start;
+  const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : W.service === "conc" ? LINKS.conc : LINKS.start;
   return base + "?client_reference_id=" + payRef();
 }
 function payOk() {
@@ -898,6 +951,7 @@ function payOk() {
   if (W.service === "intyg") return $("i1").checked && $("i2").checked;
   if (W.service === "kort") return $("k1").checked && $("k2").checked && $("k3").checked;
   if (W.service === "jour") return $("j1").checked && $("j2").checked;
+  if (W.service === "conc") return $("m1").checked && $("m2").checked && $("m3").checked;
   return !!(W.result && (W.result.level === "ok" || W.result.level === "review"));
 }
 function updatePay() {
@@ -908,7 +962,9 @@ function updatePay() {
 ["c1", "c2"].forEach((id) => $(id).addEventListener("change", () => { updateTotal(); updatePay(); }));
 $("btnPay").addEventListener("click", (e) => {
   if (!payOk()) { e.preventDefault(); $("payMsg").textContent = "Godkänn båda rutorna först."; return; }
-  $("payMsg").textContent = "Betalningen sker på Stripes sida i en ny flik. Tiden " + slotText(SLOTS[W.slot]) + " är bokad först när du fått bekräftelse på e-post.";
+  $("payMsg").textContent = W.service === "conc"
+    ? "Betalningen sker på Stripes sida i en ny flik. Medlemskapet förnyas varje månad tills du säger upp det."
+    : "Betalningen sker på Stripes sida i en ny flik. Tiden " + slotText(SLOTS[W.slot]) + " är bokad först när du fått bekräftelse på e-post.";
 });
 
 show("service");
