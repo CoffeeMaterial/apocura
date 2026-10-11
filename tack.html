@@ -20,9 +20,20 @@ a{color:var(--primary);font-weight:600}
 <main>
 <div class="ok" aria-hidden="true">✓</div>
 <h1>Tack, din betalning är genomförd</h1>
-<p>Du får en bekräftelse med tid och instruktioner på den e-postadress du angav. Din tid är bokad först när du har fått bekräftelsen.</p>
+<div id="cal" hidden>
+<p>Välj nu en tid som passar dig. Du får en kalenderinbjudan med videolänk direkt när du bokat.</p>
+<p><a id="calBtn" href="#" style="display:inline-block;background:var(--primary);color:var(--bg);padding:12px 20px;border-radius:999px;text-decoration:none">Välj tid</a></p>
+</div>
+<div id="nocal">
+<p>Vi bekräftar din tid via e-post. Din tid är bokad först när du har fått bekräftelsen.</p>
 <p>Hör av dig om du inte fått den inom en timme. Titta först i skräppostmappen.</p>
+</div>
 <p><a href="./">Tillbaka till startsidan</a></p>
 </main>
+<script>
+// Klistra in länken till din Google Kalender-bokningssida här:
+const CAL_URL="";
+if(CAL_URL){document.getElementById("calBtn").href=CAL_URL;document.getElementById("cal").hidden=false;document.getElementById("nocal").hidden=true;}
+</script>
 </body>
 </html>
