@@ -10,6 +10,31 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2A7F73">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232A7F73'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+.small{font-size:13px}
+.inq{display:flex;flex-direction:column;gap:12px;min-width:min(480px,86vw)}
+#inqDlg{border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--ink);padding:26px;max-width:92vw;max-height:92vh;overflow:auto}
+#inqDlg::backdrop{background:rgba(10,30,25,.5)}
+.inq label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:15px}
+.inq input,.inq select,.inq textarea{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.inq .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.inq .two{grid-template-columns:1fr}}
+.chat-btn{position:fixed;right:18px;bottom:18px;z-index:60;font:600 15px var(--f-body);background:var(--primary);color:var(--primary-ink);border:0;border-radius:999px;padding:13px 20px;cursor:pointer;box-shadow:0 8px 24px rgba(10,40,30,.25)}
+.chat{position:fixed;right:18px;bottom:76px;z-index:61;width:min(380px,calc(100vw - 24px));height:min(560px,calc(100vh - 100px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 50px rgba(10,40,30,.28);display:flex;flex-direction:column;overflow:hidden}
+.chat[hidden]{display:none}
+.chat header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--primary);color:var(--primary-ink)}
+.chat header button{background:transparent;border:0;color:inherit;font-size:24px;line-height:1;cursor:pointer}
+.chat-note{margin:0;padding:8px 16px;font-size:12.5px;color:var(--muted);background:var(--primary-soft)}
+.chat-log{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:10px 13px;border-radius:14px;font-size:15px;line-height:1.45;white-space:pre-wrap}
+.msg.bot{align-self:flex-start;background:var(--primary-soft)}
+.msg.me{align-self:flex-end;background:var(--primary);color:var(--primary-ink)}
+.msg a{color:inherit;font-weight:600}
+.chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}
+.chat-chips button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}
+.chat-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.chat-form input{flex:1;font:inherit;padding:9px 12px;border:1.5px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);min-width:0}
+</style>
 </head>
 <body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600&display=swap">
@@ -293,9 +318,8 @@ body.v-lock{overflow:hidden}
         <h1>Läkarbedömning och intyg till ett pris du ser i förväg.</h1>
         <p class="lead">Viktbedömning och sjukintyg via videobesök, och läkarintyg för körkort vid undersökning på mottagningen. Du betalar för bedömningen, inte för ett visst utfall.</p>
         <div class="row">
-          <a class="btn" href="#boka" data-pick="vikt">Boka viktbedömning</a>
-          <a class="btn alt" href="#boka" data-pick="intyg">Boka sjukintyg</a>
-          <a class="btn alt" href="#boka" data-pick="kort">Boka körkortsintyg</a>
+          <a class="btn" href="#boka" data-pick="">Boka tid</a>
+          <a class="btn alt" href="#tjanster">Se alla tjänster och priser</a>
         </div>
         <div class="chips">
           <span class="chip">Legitimerad läkare</span>
@@ -411,6 +435,32 @@ body.v-lock{overflow:hidden}
             </ul>
             <p class="notinc">Ingår inte: akut vård (ring 112), hembesök, läkemedel som betalas på apotek, provtagning, och intyg, som har eget pris. Läkaren kan inte ersätta en akutmottagning eller din vårdcentral vid allvarliga besvär.</p>
           </div>
+        </article>
+        <article class="svc" id="matchlakare">
+          <p class="eyebrow">Idrott och evenemang</p>
+          <h3>Matchläkare</h3>
+          <p class="muted">En legitimerad läkare på plats under match eller evenemang, så att spelare och publik har medicinskt stöd nära till hands.</p>
+          <ul>
+            <li>Läkare närvarande under hela uppdraget</li>
+            <li>Bedömning och första omhändertagande av skador och akuta tillstånd</li>
+            <li>Medicinskt beslut om en spelare kan fortsätta spela eller behöver vidare vård</li>
+          </ul>
+          <p class="notinc">Ingår inte: ambulanstransport och vård efter uppdraget. Restid och resekostnad avtalas i förväg.</p>
+          <p class="price num">1 400 kr <small>per timme</small></p>
+          <button class="btn" type="button" data-inq="match">Skicka förfrågan</button>
+        </article>
+        <article class="svc" id="lagLakare">
+          <p class="eyebrow">Förening och lag</p>
+          <h3>Lagläkare</h3>
+          <p class="muted">En namngiven läkare som följer ert lag över tid. Omfattning, tillgänglighet och villkor bestämmer vi tillsammans utifrån vad ert lag behöver.</p>
+          <ul>
+            <li>En fast läkare som laget och tränarna känner</li>
+            <li>Medicinsk rådgivning till spelare och ledare</li>
+            <li>Närvaro vid matcher och träningar enligt överenskommelse</li>
+          </ul>
+          <p class="notinc">Pris och villkor avtalas. Vi går igenom ditt behov och återkommer med ett förslag.</p>
+          <p class="price num">Enligt överenskommelse</p>
+          <button class="btn alt" type="button" data-inq="lag">Diskutera villkor</button>
         </article>
       </div>
     </div>
@@ -554,6 +604,8 @@ body.v-lock{overflow:hidden}
         <li><div><b>Läkarintyg för körkort, högre behörighet</b><p class="d">Undersökning på plats med hälsoundersökning och syntest</p></div><span class="p num">995 kr</span></li>
         <li><div><b>Journalgenomgång och förklaring</b><p class="d">Videobesök, 60 minuter</p></div><span class="p num">2 500 kr</span></li>
         <li><div><b>Läkarconcierge, medlemskap</b><p class="d">Chat med läkare och ett videobesök på upp till 30 minuter varje månad. Ingen bindningstid.</p></div><span class="p num">3 000 kr/mån</span></li>
+        <li><div><b>Matchläkare</b><p class="d">Läkare på plats under match eller evenemang. Du skickar en förfrågan, och betalar efter att uppdraget är bekräftat.</p></div><span class="p num">1 400 kr/timme</span></li>
+        <li><div><b>Lagläkare</b><p class="d">Namngiven läkare för ert lag. Omfattning och villkor avtalas.</p></div><span class="p num">Enligt överenskommelse</span></li>
       </ul>
       <p class="note">Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen. Om läkaren bedömer att läkemedel är aktuellt köper du det själv på apotek, och läkaren går igenom kostnaden med dig vid besöket.</p>
     </div>
@@ -721,6 +773,35 @@ body.v-lock{overflow:hidden}
     </div>
   </section>
 </main>
+
+
+<dialog id="inqDlg" aria-labelledby="inqTitle">
+  <form method="dialog" id="inqForm" class="inq">
+    <h3 id="inqTitle">Förfrågan</h3>
+    <p class="muted" id="inqLead"></p>
+    <div id="inqFields"></div>
+    <p class="muted" id="inqCost" hidden></p>
+    <p class="muted small">Skriv inga hälsouppgifter här. Du betalar ingenting nu. Vi bekräftar uppdraget och avtalar villkoren först.</p>
+    <p class="status" id="inqMsg" role="status"></p>
+    <div class="row">
+      <button class="btn" type="submit" id="inqSend">Skicka förfrågan</button>
+      <button class="btn alt" type="button" id="inqClose">Avbryt</button>
+    </div>
+    <div id="inqCopy" hidden>
+      <p class="muted">Kontaktadressen läggs in innan sidan publiceras. Kopiera meddelandet så länge:</p>
+      <textarea id="inqText" readonly rows="7"></textarea>
+    </div>
+  </form>
+</dialog>
+
+<button id="chatBtn" class="chat-btn" type="button" aria-expanded="false" aria-controls="chatPanel">Fråga oss</button>
+<section id="chatPanel" class="chat" role="dialog" aria-label="Chatt om våra tjänster" hidden>
+  <header><b>Fråga om våra tjänster</b><button id="chatX" type="button" aria-label="Stäng chatten">×</button></header>
+  <p class="chat-note">Automatisk assistent, inte en läkare. Skriv inga hälsouppgifter eller personnummer.</p>
+  <div id="chatLog" class="chat-log" aria-live="polite"></div>
+  <div id="chatChips" class="chat-chips"></div>
+  <form id="chatForm" class="chat-form"><input id="chatIn" type="text" autocomplete="off" placeholder="Skriv din fråga" aria-label="Din fråga"><button class="btn sm" type="submit">Skicka</button></form>
+</section>
 
 <footer>
   <div class="wrap">
@@ -1059,6 +1140,95 @@ if (!reduce && "IntersectionObserver" in window) {
   st.addEventListener('click',function(){on()?close():open();});
   document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement){pl.classList.remove('v-full');document.body.classList.remove('v-lock');b.textContent='Förstora';}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pl.classList.contains('v-full'))close();});
+})();
+</script>
+<script>
+(function(){
+const CONTACT_EMAIL = ""; // Fyll i adressen som förfrågningar och överlämningar ska skickas till
+const $=(id)=>document.getElementById(id);
+function deliver(subject, body, copyBox, copyTxt, msgEl){
+  if(CONTACT_EMAIL){ location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body); if(msgEl) msgEl.textContent="Ditt mejlprogram öppnas. Skicka mejlet där."; }
+  else { copyBox.hidden=false; copyTxt.value=body; copyTxt.select(); if(msgEl) msgEl.textContent=""; }
+}
+/* Förfrågningsformulär */
+const INQ={
+  match:{title:"Förfrågan om matchläkare",lead:"Berätta om uppdraget. 1 400 kr per timme. Vi bekräftar om vi kan ta det.",
+    fields:[["org","Förening eller arrangör","text",1],["date","Datum","date",1],["start","Starttid","time",1],["hours","Antal timmar","number",1],["place","Plats","text",1],["name","Ditt namn","text",1],["contact","E-post eller telefon","text",1],["note","Övrigt (till exempel nivå och antal deltagare)","textarea",0]]},
+  lag:{title:"Diskutera villkor för lagläkare",lead:"Beskriv vad ert lag behöver. Vi återkommer med ett förslag på omfattning och villkor.",
+    fields:[["org","Förening eller lag","text",1],["sport","Idrott och nivå","text",1],["scope","Vad önskar ni? (matcher, träningar, rådgivning)","textarea",1],["name","Ditt namn","text",1],["contact","E-post eller telefon","text",1]]}
+};
+let cur=null;
+function openInq(k){
+  cur=k;const c=INQ[k];$("inqTitle").textContent=c.title;$("inqLead").textContent=c.lead;$("inqMsg").textContent="";$("inqCopy").hidden=true;
+  const box=$("inqFields");box.replaceChildren();
+  c.fields.forEach(([id,label,type,req])=>{
+    const l=document.createElement("label");l.textContent=label+(req?"":" (valfritt)");
+    const f=document.createElement(type==="textarea"?"textarea":"input");
+    if(type==="textarea") f.rows=3; else f.type=type;
+    if(type==="number"){f.min=1;f.max=12;f.value=2;}
+    f.id="inq_"+id;f.required=!!req;l.append(f);box.append(l);
+  });
+  if(k==="match"){ $("inq_hours").addEventListener("input",cost); cost(); } else { $("inqCost").hidden=true; }
+  $("inqDlg").showModal();
+}
+function cost(){const h=Math.max(0,parseFloat($("inq_hours").value)||0);$("inqCost").hidden=false;$("inqCost").textContent="Preliminär kostnad: "+(h*1400).toLocaleString("sv-SE")+" kr ("+h+" timmar × 1 400 kr). Restid och resekostnad avtalas i förväg.";}
+document.querySelectorAll("[data-inq]").forEach(b=>b.addEventListener("click",()=>openInq(b.dataset.inq)));
+$("inqClose").addEventListener("click",()=>$("inqDlg").close());
+$("inqForm").addEventListener("submit",(e)=>{
+  e.preventDefault();const c=INQ[cur];
+  const lines=c.fields.map(([id,label])=>label+": "+($("inq_"+id).value||"-"));
+  deliver(c.title,c.title+"\n\n"+lines.join("\n"),$("inqCopy"),$("inqText"),$("inqMsg"));
+});
+/* Chatt */
+const KB=[
+ {k:["pris","kostar","kostnad","kr ","betala","avgift"],a:"Våra priser:\n• Viktbedömning 795 kr (30 min video)\n• Sjukintyg 495 kr (20 min video)\n• Läkarintyg för körkort, högre behörighet 995 kr (undersökning på plats)\n• Journalgenomgång 2 500 kr per timme\n• Läkarconcierge 3 000 kr per månad\n• Matchläkare 1 400 kr per timme\n• Lagläkare enligt överenskommelse\nPriset ser du alltid innan du betalar och det gäller bedömningen, inte ett visst utfall."},
+ {k:["vikt","viktnedgång","övervikt","fetma"],a:"Viktbedömning (795 kr, 30 minuter via video) är en medicinsk bedömning där läkaren går igenom din hälsa och tidigare försök och berättar vilka behandlingar som kan passa. Ingår inte: läkemedel (betalas på apotek), provtagning och uppföljning. Uppföljning är frivillig, kostar 399 kr per månad och bestäms först efter bedömningen. Du får inte automatiskt recept, läkaren avgör vad som är lämpligt."},
+ {k:["sjukintyg","sjukskriv","intyg för sjuk","försäkringskassan"],a:"Sjukintyg kostar 495 kr och är ett videobesök på 20 minuter. Läkaren gör en bedömning och avgör om ett intyg är lämpligt. Priset är detsamma oavsett om du får intyget eller inte."},
+ {k:["körkort","körkortsintyg","behörighet"],a:"Läkarintyg för körkort (högre behörighet) kostar 995 kr och görs som en undersökning på mottagningen, inte på video. Adressen läggs in innan sidan publiceras."},
+ {k:["journal","genomgång","förklara"],a:"Journalgenomgång (2 500 kr per timme, video) innebär att en läkare går igenom din journal och förklarar diagnoser, provsvar och behandlingar. Ingår inte: ny behandling, recept, sjukskrivning eller ny diagnos."},
+ {k:["concierge","medlem","månad","abonnemang","prenumeration"],a:"Läkarconcierge (3 000 kr per månad) ger dig direktkontakt med läkare via säker chatt med svar inom en arbetsdag och ett videobesök på upp till 30 minuter varje månad. Ingen bindningstid, du säger upp när du vill. Ingår inte akut vård, hembesök, läkemedel eller intyg."},
+ {k:["match","idrott","evenemang","turnering"],a:"Matchläkare kostar 1 400 kr per timme. Läkaren är på plats under hela uppdraget och bedömer och tar hand om skador och akuta tillstånd. Skicka en förfrågan med datum, plats och antal timmar, så bekräftar vi. Du betalar inget förrän uppdraget är bekräftat.",btn:["Skicka förfrågan om matchläkare","match"]},
+ {k:["lagläkare","lag ","förening","laget","avtal","villkor"],a:"Lagläkare är en namngiven läkare som följer ert lag över tid. Omfattning och villkor bestämmer vi tillsammans. Beskriv vad ni behöver så återkommer vi med ett förslag.",btn:["Diskutera villkor för lagläkare","lag"]},
+ {k:["boka","bokning","tid","när","ledig"],a:"Så bokar du: 1) välj tjänst, 2) svara på några korta frågor, 3) betala, och 4) välj en ledig tid direkt efter betalningen. Du är bokad först när du har valt en tid och fått bekräftelse på e-post.",btn:["Gå till bokningen","#boka"]},
+ {k:["recept","läkemedel","medicin","ozempic","wegovy"],a:"Läkaren gör alltid en egen medicinsk bedömning och avgör om recept är lämpligt. Det går inte att lova ett visst läkemedel i förväg, och priset gäller bedömningen."},
+ {k:["video","hur fungerar","hur går","digital"],a:"Videobesöket sker i en länk du får i bekräftelsen, direkt i webbläsaren eller mobilen. Du behöver kamera och mikrofon. Läkaren pratar med dig och gör bedömningen, och allt annat sköts automatiskt före och efter besöket."},
+ {k:["vem","läkare","legitimerad","daniel"],a:"Du träffar alltid läkaren själv. Daniel Mira är legitimerad läkare och specialistutbildar sig i allmänmedicin. Läs mer under rubriken Läkaren på sidan.",btn:["Läs om läkaren","#lakaren"]},
+ {k:["avboka","ångra","återbetal","pengar tillbaka"],a:"Det här har vi inte fastställt än, så jag vill inte lova något fel. Be gärna läkaren svara direkt."},
+ {k:["säker","integritet","personuppgift","gdpr","sekretess"],a:"Du kan inte skriva hälsouppgifter i den här chatten. Hälsouppgifter lämnar du i bokningsflödet. Vi behandlar uppgifter enligt patientdatalagen. Fullständig information om hur uppgifterna hanteras publiceras innan vi tar emot patienter."}
+];
+const SYMP=["ont ","smärta","blöd","andas","bröstsmärta","feber","yr ","svimm","självmord","dö ","tabletter","symtom","mår dåligt","kräks"];
+const log=$("chatLog"),chips=$("chatChips"),inp=$("chatIn");
+function add(txt,who,btn){
+  const d=document.createElement("div");d.className="msg "+who;d.textContent=txt;
+  if(btn){const b=document.createElement("button");b.type="button";b.className="btn sm";b.style.marginTop="8px";b.style.display="block";b.textContent=btn[0];
+    b.onclick=()=>{ if(btn[1].startsWith("#")){ $("chatPanel").hidden=true; $("chatBtn").setAttribute("aria-expanded","false"); location.hash=btn[1]; } else { openInq(btn[1]); } };d.append(b);}
+  log.append(d);log.scrollTop=log.scrollHeight;return d;
+}
+function handoff(){
+  const t=[...log.querySelectorAll(".msg")].map(m=>(m.classList.contains("me")?"Besökare: ":"Assistent: ")+m.firstChild.textContent).join("\n");
+  const d=add("Jag skickar vidare till läkaren som svarar så snart det går. Lägg till din e-postadress så vet vi vart vi ska svara.","bot");
+  const f=document.createElement("input");f.type="email";f.placeholder="din@epost.se";f.style.cssText="display:block;width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid var(--line);font:inherit;box-sizing:border-box";
+  const b=document.createElement("button");b.type="button";b.className="btn sm";b.style.marginTop="8px";b.textContent="Skicka till läkaren";
+  const out=document.createElement("textarea");out.rows=6;out.hidden=true;out.readonly=true;out.style.cssText="width:100%;margin-top:8px;font:inherit;font-size:12px;box-sizing:border-box";
+  b.onclick=()=>{ if(!f.value||!f.checkValidity()){f.focus();return;} deliver("Fråga från hemsidans chatt","Svara till: "+f.value+"\n\nSamtal:\n"+t,out,out,null); if(CONTACT_EMAIL) add("Ditt mejlprogram öppnas. Skicka mejlet där.","bot"); else {out.hidden=false;} };
+  d.append(f,b,out);log.scrollTop=log.scrollHeight;
+}
+function answer(q){
+  const l=" "+q.toLowerCase()+" ";
+  if(/\b(människa|läkaren|riktig person|prata med|kontakta)\b/.test(l)||l.includes("ta över")){ handoff(); return; }
+  if(SYMP.some(w=>l.includes(w))){ add("Jag kan inte ge medicinsk rådgivning i chatten. Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177. Vill du boka ett läkarbesök kan jag visa hur det går till, eller så skickar jag din fråga vidare till läkaren.","bot",["Gå till bokningen","#boka"]); return; }
+  let best=null,sc=0;KB.forEach(e=>{const n=e.k.filter(w=>l.includes(w)).length;if(n>sc){sc=n;best=e;}});
+  if(best){ add(best.a,"bot",best.btn); return; }
+  add("Det kan jag inte svara säkert på. Vill du att läkaren tar över? Då skickar jag din fråga vidare.","bot");
+  const b=document.createElement("button");b.type="button";b.className="btn sm";b.textContent="Prata med läkaren";b.style.alignSelf="flex-start";b.onclick=handoff;log.append(b);log.scrollTop=log.scrollHeight;
+}
+["Vad kostar det?","Hur bokar jag?","Vad ingår i viktbedömningen?","Vad är matchläkare?","Prata med läkaren"].forEach(t=>{
+  const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>{add(t,"me");answer(t);};chips.append(b);
+});
+$("chatForm").addEventListener("submit",(e)=>{e.preventDefault();const v=inp.value.trim();if(!v)return;add(v,"me");inp.value="";answer(v);});
+function toggle(open){ $("chatPanel").hidden=!open; $("chatBtn").setAttribute("aria-expanded",String(open)); if(open){ if(!log.children.length) add("Hej! Jag svarar på frågor om våra tjänster, priser och hur bokningen går till. Om jag inte kan svara kan läkaren ta över.","bot"); inp.focus(); } }
+$("chatBtn").addEventListener("click",()=>toggle($("chatPanel").hidden));
+$("chatX").addEventListener("click",()=>toggle(false));
 })();
 </script>
 </body>
