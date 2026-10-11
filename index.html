@@ -254,6 +254,9 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
 .doc-fallback { font-family: var(--f-display); font-size: 64px; font-weight: 700; color: var(--primary); }
 .doc-text h2 { margin-bottom: 10px; }
 .doc-text p { margin: 0 0 10px; }
+.cv { list-style: none; margin: 4px 0 12px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.cv li { padding-left: 24px; position: relative; color: var(--ink); }
+.cv li::before { content: "\2713"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
 @media (max-width: 640px) { .doc-card { grid-template-columns: 1fr; justify-items: start; } .doc-photo { width: 140px; height: 140px; } .doc-fallback { font-size: 44px; } }
 </style>
 
@@ -512,7 +515,14 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         <div class="doc-text">
           <p class="eyebrow">Din läkare</p>
           <h2>Daniel Mira</h2>
-          <p class="muted">Legitimerad läkare under specialistutbildning i allmänmedicin. Du träffar alltid läkaren själv, och det är läkaren som gör bedömningen och fattar beslutet.</p>
+          <p class="muted">Jag är legitimerad läkare och specialistutbildar mig i allmänmedicin. Du träffar alltid mig själv, och det är jag som gör bedömningen och fattar beslutet.</p>
+          <ul class="cv">
+            <li>Läkarexamen från Karolinska Institutet och kandidatexamen i ekonomi från Handelshögskolan i Stockholm</li>
+            <li>Allmäntjänstgöring med kirurgi och ortopedi, internmedicin, psykiatri och primärvård</li>
+            <li>Arbetar kliniskt i primärvård och på närakut</li>
+            <li>Forskningserfarenhet från Karolinska Institutet</li>
+            <li>Talar svenska, engelska, persiska och spanska</li>
+          </ul>
           <p class="muted">Priset är detsamma oavsett utgång. Jag tjänar inte på vad du får för behandling.</p>
         </div>
       </div>
