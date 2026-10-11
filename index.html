@@ -104,6 +104,7 @@ section.s { padding-block: 56px; }
 /* Tjänster */
 .head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
 .svcs { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+@media (min-width: 700px) { .svcs { grid-template-columns: repeat(2, 1fr); } }
 .svc { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .svc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .svc li, .tick li { padding-left: 26px; position: relative; }
@@ -316,7 +317,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Tjänster</p>
-        <h2>Tre läkarbedömningar med fast pris</h2>
+        <h2>Fyra tjänster med fast pris</h2>
       </div>
       <div class="svcs">
         <article class="svc">
@@ -352,6 +353,18 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
           </ul>
           <p class="price num">995 kr <small>undersökning</small></p>
           <a class="btn" href="#boka" data-pick="kort">Boka körkortsintyg</a>
+        </article>
+        <article class="svc">
+          <h3>Journalgenomgång</h3>
+          <p class="muted">En läkare går igenom din journal och förklarar dina diagnoser, provsvar och behandlingar på ett sätt som är lätt att förstå.</p>
+          <ul>
+            <li>Videobesök, 60 minuter</li>
+            <li>Förklaring av medicinska tillstånd och termer</li>
+            <li>Du kan ställa frågor om din egen journal</li>
+            <li>Ingen ny behandling, inget recept och ingen sjukskrivning ingår</li>
+          </ul>
+          <p class="price num">2 500 kr <small>per timme</small></p>
+          <a class="btn" href="#boka" data-pick="jour">Boka journalgenomgång</a>
         </article>
       </div>
     </div>
@@ -485,6 +498,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         <li><div><b>Uppföljning under behandling</b><p class="d">Chatt med läkare och återbesök vid dosändring. Ingen bindningstid.</p></div><span class="p num">399 kr/mån</span></li>
         <li><div><b>Bedömning för sjukintyg</b><p class="d">Videobesök, 20 minuter</p></div><span class="p num">495 kr</span></li>
         <li><div><b>Läkarintyg för körkort, högre behörighet</b><p class="d">Undersökning på plats med hälsoundersökning och syntest</p></div><span class="p num">995 kr</span></li>
+        <li><div><b>Journalgenomgång och förklaring</b><p class="d">Videobesök, 60 minuter</p></div><span class="p num">2 500 kr</span></li>
       </ul>
       <p class="note">Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen. Om läkaren bedömer att läkemedel är aktuellt köper du det själv på apotek, och läkaren går igenom kostnaden med dig vid besöket.</p>
     </div>
@@ -516,6 +530,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
         <details><summary>Vad kostar läkemedlet?</summary><p>Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen, så du betalar själv på apotek. Kostnaden varierar mellan läkemedel och doser. Läkaren går igenom den med dig.</p></details>
         <details><summary>Hur fungerar ett sjukintyg?</summary><p>Läkaren bedömer din arbetsförmåga utifrån vad som framkommer vid videobesöket och avgör om ett intyg kan utfärdas. Behöver du träffas fysiskt eller söka annan vård får du veta det.</p></details>
         <details><summary>Behöver jag läkarintyg för att förlänga min lastbils- eller bussbehörighet?</summary><p>Det beror på din ålder när behörigheten går ut. Är du under 45 år räcker en hälsodeklaration och ett grundläggande synintyg. Från 45 år krävs ett läkarintyg. Intyget får vara högst två månader gammalt när du ansöker. <a href="https://www.transportstyrelsen.se/sv/vagtrafik/Korkort/har-korkort/forlangning-av-hogre-behorigheter/" target="_blank" rel="noopener">Läs mer hos Transportstyrelsen</a>.</p></details>
+        <details><summary>Vad ingår i en journalgenomgång?</summary><p>Läkaren förklarar innehållet i din journal: diagnoser, provsvar, läkemedel och medicinska termer. Det är en genomgång och förklaring, inte en ny bedömning, och du får inga recept eller sjukskrivning. Besöket är 60 minuter och kostar 2 500 kr.</p></details>
         <details><summary>Varför sker körkortsundersökningen på plats?</summary><p>Intyget bygger på en grundläggande hälsoundersökning och ett syntest. Det kräver utrustning och en fysisk undersökning, så du bokar ett besök på mottagningen i stället för video.</p></details>
         <details><summary>Kan ni hjälpa vid akuta besvär?</summary><p>Nej. Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p></details>
         <details><summary>Hur hanteras mina uppgifter?</summary><p>Läkarbesöket journalförs enligt patientdatalagen. Besöket kan med ditt samtycke transkriberas för att skriva journalen, och ljudet sparas inte. Kontrollen på den här sidan sparar inga svar.</p></details>
@@ -542,6 +557,7 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
             <button class="pick" data-pick="vikt" type="button"><b>Viktbedömning</b><span class="muted num">795 kr, 30 minuter</span></button>
             <button class="pick" data-pick="intyg" type="button"><b>Sjukintyg</b><span class="muted num">495 kr, 20 minuter</span></button>
             <button class="pick" data-pick="kort" type="button"><b>Körkortsintyg</b><span class="muted num">995 kr, undersökning på plats</span></button>
+            <button class="pick" data-pick="jour" type="button"><b>Journalgenomgång</b><span class="muted num">2 500 kr, 60 minuter</span></button>
           </div>
         </div>
 
@@ -594,6 +610,19 @@ footer .wrap { display: flex; flex-direction: column; gap: 10px; }
           </div>
           <div class="row">
             <button class="btn" id="btnKortNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-jour" hidden>
+          <h3>Innan du bokar journalgenomgång</h3>
+          <p class="muted">Läkaren går igenom din journal och förklarar medicinska tillstånd, provsvar och termer. Du kan läsa din journal i 1177 efter inloggning och visa den på skärmen under besöket, eller ta fram dina uppgifter på annat sätt.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="j1"><span>Jag förstår att besöket är en genomgång och förklaring, och att ingen ny behandling, recept eller sjukskrivning ingår.</span></label>
+            <label class="chk"><input type="checkbox" id="j2"><span>Jag delar själv de uppgifter jag vill gå igenom, och jag förstår att läkaren inte kan se mer än det jag visar.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnJourNext" type="button" disabled>Fortsätt</button>
             <button class="btn alt" data-back type="button">Byt tjänst</button>
           </div>
         </div>
@@ -698,9 +727,10 @@ const LINKS = {
   start: "https://book.stripe.com/test_5kQfZjdhB1CE1Cj9hGbAs00",
   both: "https://buy.stripe.com/test_28EfZjfpJ2GI2Gn3XmbAs01",
   sjuk: "https://book.stripe.com/test_14AeVf91l8125SzdxWbAs02",
-  kort: "https://book.stripe.com/test_4gMcN76Tdgxy6WD65ubAs03"
+  kort: "https://book.stripe.com/test_4gMcN76Tdgxy6WD65ubAs03",
+  jour: "https://book.stripe.com/test_5kQ9AVdhB6WY1Cj9hGbAs04"
 };
-const PRICE = { vikt: 795, sub: 399, intyg: 495, kort: 995 };
+const PRICE = { vikt: 795, sub: 399, intyg: 495, kort: 995, jour: 2500 };
 const W = { service: null, step: "service", result: null, slot: 1 };
 
 function checkGroup(host, items, name) {
@@ -767,19 +797,20 @@ function show(step) {
   $("w-check-vikt").hidden = !(step === "check" && W.service === "vikt");
   $("w-check-intyg").hidden = !(step === "check" && W.service === "intyg");
   $("w-check-kort").hidden = !(step === "check" && W.service === "kort");
+  $("w-check-jour").hidden = !(step === "check" && W.service === "jour");
   $("w-pay").hidden = step !== "pay";
   document.querySelectorAll("#stepper li").forEach((li) => li.classList.toggle("on", li.dataset.s === step));
   if (step === "pay") preparePay();
 }
 function pick(service) {
-  if (service !== "vikt" && service !== "intyg" && service !== "kort") { return; }
+  if (service !== "vikt" && service !== "intyg" && service !== "kort" && service !== "jour") { return; }
   if (W.service !== service) { W.result = null; $("resultBox").hidden = true; $("payMsg").textContent = ""; }
   W.service = service;
   show("check");
 }
 function preparePay() {
   const v = W.service === "vikt";
-  const T = { vikt: "Välj tid för viktbedömning", intyg: "Välj tid för sjukintyg", kort: "Välj tid för undersökning på plats" };
+  const T = { vikt: "Välj tid för viktbedömning", intyg: "Välj tid för sjukintyg", kort: "Välj tid för undersökning på plats", jour: "Välj tid för journalgenomgång" };
   $("payTitle").textContent = T[W.service];
   $("subRow").hidden = !v;
   $("payPlace").hidden = W.service !== "kort";
@@ -832,10 +863,16 @@ function updateKort() { $("btnKortNext").disabled = !($("k1").checked && $("k2")
 ["k1", "k2", "k3"].forEach((id) => $(id).addEventListener("change", updateKort));
 $("btnKortNext").onclick = () => show("pay");
 
+/* Kontroll, journalgenomgång */
+function updateJour() { $("btnJourNext").disabled = !($("j1").checked && $("j2").checked); }
+["j1", "j2"].forEach((id) => $(id).addEventListener("change", updateJour));
+$("btnJourNext").onclick = () => show("pay");
+
 /* Betalning */
 function totalNow() {
   if (W.service === "intyg") return PRICE.intyg;
   if (W.service === "kort") return PRICE.kort;
+  if (W.service === "jour") return PRICE.jour;
   return PRICE.vikt + ($("sub").checked ? PRICE.sub : 0);
 }
 function updateTotal() { $("total").textContent = fmt(totalNow()) + " kr"; }
@@ -845,13 +882,14 @@ function payRef() {
   return W.service + "-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + p(d.getHours()) + p(d.getMinutes());
 }
 function payHref() {
-  const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : ($("sub").checked ? LINKS.both : LINKS.start);
+  const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : ($("sub").checked ? LINKS.both : LINKS.start);
   return base + "?client_reference_id=" + payRef();
 }
 function payOk() {
   if (!$("c1").checked || !$("c2").checked) return false;
   if (W.service === "intyg") return $("i1").checked && $("i2").checked;
   if (W.service === "kort") return $("k1").checked && $("k2").checked && $("k3").checked;
+  if (W.service === "jour") return $("j1").checked && $("j2").checked;
   return !!(W.result && (W.result.level === "ok" || W.result.level === "review"));
 }
 function updatePay() {
