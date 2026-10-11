@@ -328,8 +328,8 @@ body.v-lock{overflow:hidden}
         </svg>
         <div class="vcard">
           <b>Ditt videobesök</b>
-          <span class="t num" id="heroTime">–</span>
-          <span class="tag">Bekräftas via e-post</span>
+          <span class="t" id="heroTime">Videobesök · 30 min</span>
+          <span class="tag">Tid väljs efter betalning</span>
         </div>
       </div>
     </div>
@@ -424,7 +424,7 @@ body.v-lock{overflow:hidden}
       </div>
       <ol class="steps">
         <li><span class="n">Steg 1</span><h3>Välj och kolla</h3><p class="muted">Välj tjänst och gör en kort kontroll. Vid viktbedömning ser du direkt om det kan vara aktuellt. Dina svar sparas inte.</p></li>
-        <li><span class="n">Steg 2</span><h3>Boka och betala</h3><p class="muted">Välj en tid. Du ser priset innan du betalar och får bekräftelse på e-post.</p></li>
+        <li><span class="n">Steg 2</span><h3>Boka och betala</h3><p class="muted">Du ser priset innan du betalar. Direkt efter betalningen väljer du en ledig tid och får en bekräftelse med videolänk på e-post.</p></li>
         <li><span class="n">Steg 3</span><h3>Träffa läkaren</h3><p class="muted">Ni möts på video, eller på mottagningen när undersökningen kräver det. Läkaren går igenom din hälsa och gör en medicinsk bedömning.</p></li>
         <li><span class="n">Steg 4</span><h3>Få en plan</h3><p class="muted">Beroende på bedömningen kan det bli recept, intyg, uppföljning eller råd om var du bör söka vård.</p></li>
       </ol>
@@ -445,7 +445,7 @@ body.v-lock{overflow:hidden}
           <h4>Välj tjänst och tid</h4>
           <div class="v-row v-sel"><span>Viktbedömning</span><b>795 kr</b></div>
           <div class="v-row"><span>Sjukintyg</span><b>495 kr</b></div>
-          <div class="v-row v-pop v-d1"><span>Tis 13:30</span><span>vald tid</span></div>
+          <div class="v-row v-pop v-d1"><span>Välj ledig tid</span><span>efter betalning</span></div>
           <div class="v-btn v-pulse v-pop v-d2">Betala och boka</div>
         </div>
       </div>
@@ -605,7 +605,7 @@ body.v-lock{overflow:hidden}
         <ol class="stepper" id="stepper">
           <li data-s="service">1. Tjänst</li>
           <li data-s="check">2. Kontroll</li>
-          <li data-s="pay">3. Tid och betalning</li>
+          <li data-s="pay">3. Betalning</li>
         </ol>
 
         <div class="panel" id="w-service">
@@ -699,10 +699,10 @@ body.v-lock{overflow:hidden}
         </div>
 
         <div class="panel" id="w-pay" hidden>
-          <h3 id="payTitle">Välj tid</h3>
+          <h3 id="payTitle">Betalning</h3>
           <p class="muted" id="payPlace" hidden>Undersökningen sker på mottagningen: [adress, fylls i före publicering].</p>
-          <div class="slots" id="slots"></div>
-          <p class="muted" id="concNote" hidden>Du väljer ingen tid nu. När du är medlem får du en länk för att boka ditt första videobesök. Medlemskapet förnyas varje månad tills du säger upp det.</p>
+          <p class="muted" id="timeNote">Du väljer tid direkt efter betalningen. Du är bokad först när du har valt en tid och fått bekräftelse på e-post.</p>
+          <p class="muted" id="concNote" hidden>När du är medlem får du en länk för att boka ditt första videobesök. Medlemskapet förnyas varje månad tills du säger upp det.</p>
           <p class="muted" id="subRow">Priset gäller bedömningen. Uppföljning ingår inte och bestäms först efter besöket. Den kostar 399 kr per månad, är frivillig och har ingen bindningstid.</p>
           <div class="checks">
             <label class="chk"><input type="checkbox" id="c1"><span>Jag godkänner att mina uppgifter behandlas för vård enligt patientdatalagen.</span></label>
@@ -803,7 +803,7 @@ const LINKS = {
   conc: "https://buy.stripe.com/test_5kQcN77Xhftu2GndxWbAs05"
 };
 const PRICE = { vikt: 795, intyg: 495, kort: 995, jour: 2500, conc: 3000 };
-const W = { service: null, step: "service", result: null, slot: 1 };
+const W = { service: null, step: "service", result: null };
 
 function checkGroup(host, items, name) {
   const h = $(host);
@@ -835,32 +835,6 @@ function updateBmi() {
 }
 ["height", "weight"].forEach((id) => $(id).addEventListener("input", updateBmi));
 
-/* Tider */
-function slotList() {
-  const out = []; const d = new Date(); d.setHours(0, 0, 0, 0);
-  while (out.length < 6) {
-    d.setDate(d.getDate() + 1);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
-    const odd = out.length % 2;
-    out.push(new Date(d.getFullYear(), d.getMonth(), d.getDate(), odd ? 13 : 9, odd ? 30 : 0));
-  }
-  return out;
-}
-const SLOTS = slotList();
-const slotText = (d) => d.toLocaleString("sv-SE", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
-const slotShort = (d) => d.toLocaleString("sv-SE", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
-$("heroTime").textContent = slotText(SLOTS[0]) + " · 30 min";
-function renderSlots() {
-  const h = $("slots"); h.replaceChildren();
-  SLOTS.forEach((d, i) => {
-    const b = document.createElement("button");
-    b.className = "slot num"; b.type = "button"; b.textContent = slotShort(d);
-    b.setAttribute("aria-pressed", String(i === W.slot));
-    b.onclick = () => { W.slot = i; renderSlots(); updatePay(); };
-    h.append(b);
-  });
-}
-
 /* Flöde */
 const ORDER = ["service", "check", "pay"];
 function show(step) {
@@ -883,13 +857,13 @@ function pick(service) {
 }
 function preparePay() {
   const v = W.service === "vikt";
-  const T = { vikt: "Välj tid för viktbedömning", intyg: "Välj tid för sjukintyg", kort: "Välj tid för undersökning på plats", jour: "Välj tid för journalgenomgång", conc: "Bli medlem i läkarconcierge" };
+  const T = { vikt: "Betala för viktbedömning", intyg: "Betala för sjukintyg", kort: "Betala för undersökning på plats", jour: "Betala för journalgenomgång", conc: "Bli medlem i läkarconcierge" };
   $("payTitle").textContent = T[W.service];
   $("subRow").hidden = !v;
   $("payPlace").hidden = W.service !== "kort";
-  $("slots").hidden = W.service === "conc";
+  $("timeNote").hidden = W.service === "conc";
   $("concNote").hidden = W.service !== "conc";
-  renderSlots(); updateTotal(); updatePay();
+  updateTotal(); updatePay();
 }
 document.querySelectorAll("[data-pick]").forEach((el) => el.addEventListener("click", () => {
   const s = el.dataset.pick;
@@ -959,9 +933,7 @@ function totalNow() {
 function updateTotal() { $("total").textContent = fmt(totalNow()) + " kr"; }
 function payRef() {
   if (W.service === "conc") return "conc-medlem";
-  const d = SLOTS[W.slot];
-  const p = (n) => String(n).padStart(2, "0");
-  return W.service + "-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + p(d.getHours()) + p(d.getMinutes());
+  return W.service + "-" + Date.now().toString(36);
 }
 function payHref() {
   const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : W.service === "conc" ? LINKS.conc : LINKS.start;
@@ -985,7 +957,7 @@ $("btnPay").addEventListener("click", (e) => {
   if (!payOk()) { e.preventDefault(); $("payMsg").textContent = "Godkänn båda rutorna först."; return; }
   $("payMsg").textContent = W.service === "conc"
     ? "Betalningen sker på Stripes sida i en ny flik. Medlemskapet förnyas varje månad tills du säger upp det."
-    : "Betalningen sker på Stripes sida i en ny flik. Tiden " + slotText(SLOTS[W.slot]) + " är bokad först när du fått bekräftelse på e-post.";
+    : "Betalningen sker på Stripes sida i en ny flik. Efter betalningen kommer du till sidan där du väljer tid. Du är bokad först när du har valt en tid.";
 });
 
 show("service");
