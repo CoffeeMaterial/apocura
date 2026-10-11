@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Läkaren | Apocura</title>
+<meta name="description" content="Daniel Mira, legitimerad läkare som specialistutbildar sig i allmänmedicin.">
+<meta property="og:title" content="Läkaren | Apocura">
+<meta property="og:description" content="Daniel Mira, legitimerad läkare som specialistutbildar sig i allmänmedicin.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2A7F73">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span><i aria-hidden="true"></i></a>
+    <nav aria-label="Sidor"><a href="tjanster.html">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html" aria-current="page">Läkaren</a><a href="fragor.html">Frågor</a></nav>
+    <a class="btn sm" href="boka.html">Boka tid</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="s" id="lakaren">
+    <div class="wrap">
+      <div class="doc-card">
+        <div class="doc-photo" id="docPhoto">
+          <img src="img/daniel.jpg" alt="Daniel Mira, legitimerad läkare" width="240" height="240" loading="lazy" onerror="this.remove()">
+          <span class="doc-fallback" aria-hidden="true">DM</span>
+        </div>
+        <div class="doc-text">
+          <p class="eyebrow">Din läkare</p>
+          <h2>Daniel Mira</h2>
+          <p class="muted">Jag är legitimerad läkare och specialistutbildar mig i allmänmedicin. Du träffar alltid mig själv, och det är jag som gör bedömningen och fattar beslutet.</p>
+          <ul class="cv">
+            <li>Läkarexamen från Karolinska Institutet och kandidatexamen i ekonomi från Handelshögskolan i Stockholm</li>
+            <li>Allmäntjänstgöring med kirurgi och ortopedi, internmedicin, psykiatri och primärvård</li>
+            <li>Arbetar kliniskt i primärvård och på närakut</li>
+            <li>Forskningserfarenhet från Karolinska Institutet</li>
+            <li>Talar svenska, engelska, persiska och spanska</li>
+          </ul>
+          <p class="muted">Priset är detsamma oavsett utgång. Jag tjänar inte på vad du får för behandling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Så arbetar vi</p>
+        <h2>Medicinska skäl styr, inte betalningen</h2>
+      </div>
+      <div class="cols">
+        <div><h3>Fast pris</h3><p class="muted">Du betalar lika mycket oavsett utfall. Läkaren har inget att vinna på att skriva ett recept eller ett intyg.</p></div>
+        <div><h3>Läkaren avgör</h3><p class="muted">Om något inte passar på distans säger läkaren det och hänvisar dig vidare, till exempel till din vårdcentral.</p></div>
+        <div><h3>Din integritet</h3><p class="muted">Journalen förs enligt patientdatalagen. Kontrollen innan bokning sparar inga svar.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button id="chatBtn" class="chat-btn" type="button" aria-expanded="false" aria-controls="chatPanel">Fråga oss</button>
+<section id="chatPanel" class="chat" role="dialog" aria-label="Chatt om våra tjänster" hidden>
+  <header><b>Fråga om våra tjänster</b><button id="chatX" type="button" aria-label="Stäng chatten">×</button></header>
+  <p class="chat-note">Automatisk assistent, inte en läkare. Skriv inga hälsouppgifter eller personnummer.</p>
+  <div id="chatLog" class="chat-log" aria-live="polite"></div>
+  <div id="chatChips" class="chat-chips"></div>
+  <form id="chatForm" class="chat-form"><input id="chatIn" type="text" autocomplete="off" placeholder="Skriv din fråga" aria-label="Din fråga"><button class="btn sm" type="submit">Skicka</button></form>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <nav class="foot-nav" aria-label="Sidor"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a><a href="boka.html">Boka tid</a></nav>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <p>Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p>
+    <p>Vårdgivare: Apocura privatläkartjänster, organisationsnummer 559263-8356 · Ansvarig verksamhetschef: [namn, fylls i före publicering]</p>
+  </div>
+  </div>
+</footer>
+
+<script src="chat.js"></script>
+</body>
+</html>

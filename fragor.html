@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanliga frågor | Apocura</title>
+<meta name="description" content="Svar på vanliga frågor om bokning, recept, intyg, läkarconcierge och hur dina uppgifter hanteras.">
+<meta property="og:title" content="Vanliga frågor | Apocura">
+<meta property="og:description" content="Svar på vanliga frågor om bokning, recept, intyg, läkarconcierge och hur dina uppgifter hanteras.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2A7F73">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span><i aria-hidden="true"></i></a>
+    <nav aria-label="Sidor"><a href="tjanster.html">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html" aria-current="page">Frågor</a></nav>
+    <a class="btn sm" href="boka.html">Boka tid</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="s" id="fragor">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Frågor</p>
+        <h2>Vanliga frågor</h2>
+      </div>
+      <div>
+        <details><summary>Får jag alltid recept eller intyg om jag bokar?</summary><p>Nej. Läkaren gör en medicinsk bedömning och avgör vad som är lämpligt. Du betalar för bedömningen och inte för ett visst utfall.</p></details>
+        <details><summary>Vem kan boka en viktbedömning?</summary><p>Vuxna över 18 år med övervikt eller fetma. Kontrollen i bokningen visar om det kan vara aktuellt. Det är läkaren som avgör vid besöket.</p></details>
+        <details><summary>Vad kostar läkemedlet?</summary><p>Läkemedel mot övervikt ingår normalt inte i läkemedelsförmånen, så du betalar själv på apotek. Kostnaden varierar mellan läkemedel och doser. Läkaren går igenom den med dig.</p></details>
+        <details><summary>Hur fungerar ett sjukintyg?</summary><p>Läkaren bedömer din arbetsförmåga utifrån vad som framkommer vid videobesöket och avgör om ett intyg kan utfärdas. Behöver du träffas fysiskt eller söka annan vård får du veta det.</p></details>
+        <details><summary>Behöver jag läkarintyg för att förlänga min lastbils- eller bussbehörighet?</summary><p>Det beror på din ålder när behörigheten går ut. Är du under 45 år räcker en hälsodeklaration och ett grundläggande synintyg. Från 45 år krävs ett läkarintyg. Intyget får vara högst två månader gammalt när du ansöker. <a href="https://www.transportstyrelsen.se/sv/vagtrafik/Korkort/har-korkort/forlangning-av-hogre-behorigheter/" target="_blank" rel="noopener">Läs mer hos Transportstyrelsen</a>.</p></details>
+        <details><summary>Hur fungerar läkarconcierge?</summary><p>Du är medlem månad för månad. Du kan skriva till läkaren via säker chat och får svar inom en arbetsdag, och du har ett videobesök på upp till 30 minuter varje månad. Det ersätter inte akutvård. Vid akut fara ringer du 112. Medlemskapet förnyas varje månad tills du säger upp det.</p></details>
+        <details><summary>Vad ingår i en journalgenomgång?</summary><p>Läkaren förklarar innehållet i din journal: diagnoser, provsvar, läkemedel och medicinska termer. Det är en genomgång och förklaring, inte en ny bedömning, och du får inga recept eller sjukskrivning. Besöket är 60 minuter och kostar 2 500 kr.</p></details>
+        <details><summary>Varför sker körkortsundersökningen på plats?</summary><p>Intyget bygger på en grundläggande hälsoundersökning och ett syntest. Det kräver utrustning och en fysisk undersökning, så du bokar ett besök på mottagningen i stället för video.</p></details>
+        <details><summary>Kan ni hjälpa vid akuta besvär?</summary><p>Nej. Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p></details>
+        <details><summary>Hur hanteras mina uppgifter?</summary><p>Läkarbesöket journalförs enligt patientdatalagen. Besöket kan med ditt samtycke transkriberas för att skriva journalen, och ljudet sparas inte. Kontrollen på den här sidan sparar inga svar.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button id="chatBtn" class="chat-btn" type="button" aria-expanded="false" aria-controls="chatPanel">Fråga oss</button>
+<section id="chatPanel" class="chat" role="dialog" aria-label="Chatt om våra tjänster" hidden>
+  <header><b>Fråga om våra tjänster</b><button id="chatX" type="button" aria-label="Stäng chatten">×</button></header>
+  <p class="chat-note">Automatisk assistent, inte en läkare. Skriv inga hälsouppgifter eller personnummer.</p>
+  <div id="chatLog" class="chat-log" aria-live="polite"></div>
+  <div id="chatChips" class="chat-chips"></div>
+  <form id="chatForm" class="chat-form"><input id="chatIn" type="text" autocomplete="off" placeholder="Skriv din fråga" aria-label="Din fråga"><button class="btn sm" type="submit">Skicka</button></form>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <nav class="foot-nav" aria-label="Sidor"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a><a href="boka.html">Boka tid</a></nav>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <p>Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p>
+    <p>Vårdgivare: Apocura privatläkartjänster, organisationsnummer 559263-8356 · Ansvarig verksamhetschef: [namn, fylls i före publicering]</p>
+  </div>
+  </div>
+</footer>
+
+<script src="chat.js"></script>
+</body>
+</html>

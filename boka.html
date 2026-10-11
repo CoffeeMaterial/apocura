@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boka tid | Apocura</title>
+<meta name="description" content="Välj tjänst, svara på några frågor och boka en tid som passar dig.">
+<meta property="og:title" content="Boka tid | Apocura">
+<meta property="og:description" content="Välj tjänst, svara på några frågor och boka en tid som passar dig.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2A7F73">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span><i aria-hidden="true"></i></a>
+    <nav aria-label="Sidor"><a href="tjanster.html">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a></nav>
+    <a class="btn sm" href="boka.html">Boka tid</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="s band" id="boka">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Boka</p>
+        <h2>Boka din tid</h2>
+        <p class="lead">Några korta steg. Du ser priset innan du betalar.</p>
+      </div>
+      <div class="wiz">
+        <ol class="stepper" id="stepper">
+          <li data-s="service">1. Tjänst</li>
+          <li data-s="check">2. Kontroll</li>
+          <li data-s="pay">3. Tid och betalning</li>
+          <li data-s="done">4. Klart</li>
+        </ol>
+
+        <div class="panel" id="w-service">
+          <div class="choose">
+            <button class="pick" data-pick="vikt" type="button"><b>Viktbedömning</b><span class="muted num">795 kr, 30 minuter</span></button>
+            <button class="pick" data-pick="intyg" type="button"><b>Sjukintyg</b><span class="muted num">495 kr, 20 minuter</span></button>
+            <button class="pick" data-pick="kort" type="button"><b>Körkortsintyg</b><span class="muted num">995 kr, undersökning på plats</span></button>
+            <button class="pick" data-pick="jour" type="button"><b>Journalgenomgång</b><span class="muted num">2 500 kr, 60 minuter</span></button>
+            <button class="pick" data-pick="conc" type="button"><b>Läkarconcierge</b><span class="muted num">3 000 kr per månad</span></button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-vikt" hidden>
+          <h3>Kontrollera om en viktbedömning passar dig</h3>
+          <p class="muted">Dina svar sparas inte och skickas inte någonstans. Läkaren går igenom allt med dig under besöket.</p>
+          <div class="grid">
+            <div class="field"><label for="sex">Kön (för att bedöma midjeomfånget)</label><select id="sex"><option value="kvinna">Kvinna</option><option value="man">Man</option></select></div>
+            <div class="field"><label for="age">Ålder (år)</label><input type="number" id="age" inputmode="numeric" min="0" max="120"></div>
+            <div class="field"><label for="height">Längd (cm)</label><input type="number" id="height" inputmode="decimal"></div>
+            <div class="field"><label for="weight">Vikt (kg)</label><input type="number" id="weight" inputmode="decimal"></div>
+            <div class="field"><label for="waist">Midjeomfång (cm)</label><input type="number" id="waist" inputmode="decimal"></div>
+          </div>
+          <p>BMI: <b class="num" id="bmiOut">–</b></p>
+          <fieldset><legend>Kryssa i de sjukdomar du har</legend><div class="checks" id="g-comorb"></div></fieldset>
+          <fieldset><legend>Kryssa i om något av detta stämmer för dig</legend><div class="checks" id="g-excl"></div></fieldset>
+          <fieldset><legend>Kryssa i om något av detta stämmer. Läkaren tittar då extra på det.</legend><div class="checks" id="g-review"></div></fieldset>
+          <fieldset><legend>Kryssa i de frågor där du svarar ja</legend><div class="checks" id="g-scoff"></div></fieldset>
+          <label class="chk"><input type="checkbox" id="selfharm"><span>Jag har de senaste veckorna haft tankar på att skada mig själv eller på att inte vilja leva.</span></label>
+          <div class="row">
+            <button class="btn" id="btnEval" type="button">Kontrollera</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+          <div id="resultBox" hidden aria-live="polite">
+            <div class="result" id="result"></div>
+            <div class="row" id="resultActions" style="margin-top:14px"></div>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-intyg" hidden>
+          <h3>Innan du bokar sjukintyg</h3>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="i1"><span>Jag har inga akuta besvär. Vid akut fara ringer jag 112.</span></label>
+            <label class="chk"><input type="checkbox" id="i2"><span>Jag förstår att läkaren avgör om ett intyg kan utfärdas och att priset gäller bedömningen.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnIntygNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-kort" hidden>
+          <h3>Innan du bokar läkarintyg för körkort</h3>
+          <p class="muted">Intyget gäller högre behörighet, till exempel lastbil och buss. Undersökningen sker på plats och omfattar en grundläggande hälsoundersökning och ett syntest. Förlänger du din behörighet och är under 45 år behöver du normalt inget läkarintyg, bara hälsodeklaration och synintyg. <a href="https://www.transportstyrelsen.se/sv/vagtrafik/Korkort/har-korkort/forlangning-av-hogre-behorigheter/" target="_blank" rel="noopener">Läs mer hos Transportstyrelsen</a>.</p>
+          <p class="muted">Ta med legitimation, glasögon eller linser om du använder sådana, och en lista på dina läkemedel.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="k1"><span>Jag vet att undersökningen sker på plats.</span></label>
+            <label class="chk"><input type="checkbox" id="k2"><span>Jag förstår att läkaren avgör om ett intyg kan utfärdas och att priset gäller undersökningen.</span></label>
+            <label class="chk"><input type="checkbox" id="k3"><span>Jag godkänner att intyget skickas digitalt till Transportstyrelsen om läkaren utfärdar det.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnKortNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-jour" hidden>
+          <h3>Innan du bokar journalgenomgång</h3>
+          <p class="muted">Läkaren går igenom din journal och förklarar medicinska tillstånd, provsvar och termer. Du kan läsa din journal i 1177 efter inloggning och visa den på skärmen under besöket, eller ta fram dina uppgifter på annat sätt.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="j1"><span>Jag förstår att besöket är en genomgång och förklaring, och att ingen ny behandling, recept eller sjukskrivning ingår.</span></label>
+            <label class="chk"><input type="checkbox" id="j2"><span>Jag delar själv de uppgifter jag vill gå igenom, och jag förstår att läkaren inte kan se mer än det jag visar.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnJourNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-check-conc" hidden>
+          <h3>Innan du blir medlem i läkarconcierge</h3>
+          <p class="muted">Medlemskapet ger dig direktkontakt med läkare via chat och ett videobesök på upp till 30 minuter varje månad. Det kostar 3 000 kr per månad.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="m1"><span>Jag har läst vad som ingår och inte ingår.</span></label>
+            <label class="chk"><input type="checkbox" id="m2"><span>Jag förstår att medlemskapet förnyas varje månad tills jag säger upp det, och att det inte finns någon bindningstid.</span></label>
+            <label class="chk"><input type="checkbox" id="m3"><span>Jag vet att tjänsten inte ersätter akut vård. Vid akut fara ringer jag 112.</span></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="btnConcNext" type="button" disabled>Fortsätt</button>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+        </div>
+
+        <div class="panel" id="w-pay" hidden>
+          <h3 id="payTitle">Välj tid och betala</h3>
+          <p class="muted" id="payPlace" hidden>Undersökningen sker på mottagningen: [adress, fylls i före publicering].</p>
+          <p class="muted" id="timeNote">Nästa steg: du väljer dag och tid och betalar i samma bokning. Tiden är bokad först när betalningen gått igenom, och då får du en bekräftelse med videolänk på e-post.</p>
+          <p class="muted" id="concNote" hidden>När du är medlem får du en länk för att boka ditt första videobesök. Medlemskapet förnyas varje månad tills du säger upp det.</p>
+          <p class="muted" id="subRow">Priset gäller bedömningen. Uppföljning ingår inte och bestäms först efter besöket. Den kostar 399 kr per månad, är frivillig och har ingen bindningstid.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="c1"><span>Jag godkänner att mina uppgifter behandlas för vård enligt patientdatalagen.</span></label>
+            <label class="chk"><input type="checkbox" id="c2"><span>Jag vet att besöket kan transkriberas för att skriva journalen och att ljudet inte sparas.</span></label>
+          </div>
+          <div id="calWrap" hidden>
+            <iframe id="calFrame" title="Välj tid och betala" loading="lazy" allow="payment"></iframe>
+            <p class="muted small">Har du fått bekräftelsen på e-post? <button class="btn alt sm" type="button" id="calDone">Jag är klar med bokningen</button></p>
+            <p class="muted small">Fungerar bokningen inte här? <a id="calOpen" href="#boka" target="_blank" rel="noopener">Öppna den i en ny flik</a>.</p>
+          </div>
+          <div class="sum"><span>Att betala idag</span><b class="num" id="total">–</b></div>
+          <p class="testbox">Testläge: betala med testkortet <b class="num">4242 4242 4242 4242</b>, valfritt framtida utgångsdatum och valfri CVC. Inga riktiga pengar dras.</p>
+          <div class="row">
+            <a class="btn" id="btnPay" href="#boka" target="_blank" rel="noopener" aria-disabled="true">Betala med Stripe</a>
+            <button class="btn alt" data-back type="button">Byt tjänst</button>
+          </div>
+          <p class="status" id="payMsg" role="status"></p>
+        </div>
+        <div class="panel" id="w-done" hidden>
+          <div class="ok" aria-hidden="true" style="width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:28px;margin-bottom:12px">✓</div>
+          <h3>Tack, du är bokad</h3>
+          <p class="muted">Du får en bekräftelse med tid och videolänk på den e-postadress du angav. Titta i skräppostmappen om den uteblir. Läkaren läser dina svar innan besöket.</p>
+          <p class="muted">Behöver du ändra eller avboka tiden gör du det via länken i bekräftelsemejlet.</p>
+          <div class="row"><a class="btn" href="./">Till startsidan</a><button class="btn alt" type="button" data-back>Boka en till tjänst</button></div>
+        </div>
+        <p class="emerg">Akut fara: ring 112. Sjukvårdsrådgivning: 1177.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button id="chatBtn" class="chat-btn" type="button" aria-expanded="false" aria-controls="chatPanel">Fråga oss</button>
+<section id="chatPanel" class="chat" role="dialog" aria-label="Chatt om våra tjänster" hidden>
+  <header><b>Fråga om våra tjänster</b><button id="chatX" type="button" aria-label="Stäng chatten">×</button></header>
+  <p class="chat-note">Automatisk assistent, inte en läkare. Skriv inga hälsouppgifter eller personnummer.</p>
+  <div id="chatLog" class="chat-log" aria-live="polite"></div>
+  <div id="chatChips" class="chat-chips"></div>
+  <form id="chatForm" class="chat-form"><input id="chatIn" type="text" autocomplete="off" placeholder="Skriv din fråga" aria-label="Din fråga"><button class="btn sm" type="submit">Skicka</button></form>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <nav class="foot-nav" aria-label="Sidor"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a><a href="boka.html">Boka tid</a></nav>
+  <div class="wrap">
+    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
+    <p>Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p>
+    <p>Vårdgivare: Apocura privatläkartjänster, organisationsnummer 559263-8356 · Ansvarig verksamhetschef: [namn, fylls i före publicering]</p>
+  </div>
+  </div>
+</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => Math.round(n).toLocaleString("sv-SE");
+
+const COMORB = { hypertoni: "Högt blodtryck", typ2: "Typ 2-diabetes eller prediabetes (förstadium)", somnapne: "Sömnapné", blodfetter: "Förhöjda blodfetter" };
+const EXCL = {
+  gravid: "Jag är gravid, försöker bli gravid eller ammar",
+  mtc: "Medullär sköldkörtelcancer eller MEN2 hos mig själv eller i min släkt",
+  allergi: "Jag har haft en allergisk reaktion mot ett läkemedel för viktminskning",
+  annatglp: "Jag använder redan ett läkemedel för viktminskning"
+};
+const REVIEW = {
+  pankreatit: "Tidigare inflammation i bukspottkörteln (pankreatit)",
+  gallsten: "Gallsten",
+  mag: "Allvarlig mag-tarmsjukdom, till exempel förlamad magsäck (gastropares) eller inflammatorisk tarmsjukdom (IBD)",
+  insulin: "Jag använder insulin eller diabetesläkemedel som kan ge lågt blodsocker (sulfonureider)",
+  retinopati: "Ögonskada av diabetes (diabetesretinopati)",
+  depression: "Depression eller annan psykisk ohälsa som jag får behandling för"
+};
+const SCOFF = [
+  "Gör du dig själv kräkas när du känner dig obehagligt mätt?",
+  "Oroar du dig för att ha förlorat kontrollen över hur mycket du äter?",
+  "Har du nyligen gått ner mer än 6 kg på tre månader?",
+  "Tycker du att du är fet fast andra säger att du är för smal?",
+  "Skulle du säga att mat dominerar ditt liv?"
+];
+
+//<triage>
+function triage(d) {
+  const reasons = [];
+  const level = { akut: 4, reject: 3, review: 2, ok: 1 };
+  let lv = "ok";
+  const up = (x) => { if (level[x] > level[lv]) lv = x; };
+  const R = (x, text) => { reasons.push({ lv: x, text }); up(x); };
+  const bmi = d.height && d.weight ? d.weight / Math.pow(d.height / 100, 2) : null;
+  if (d.selfharm) {
+    R("akut", "Du har uppgett tankar på att skada dig eller inte vilja leva.");
+    return { level: "akut", bmi, reasons };
+  }
+  if (bmi === null || d.age === null) {
+    R("review", "Ålder, längd eller vikt saknas, så BMI kan inte räknas ut.");
+    return { level: "review", bmi, reasons };
+  }
+  if (d.age < 18) R("reject", "Du är under 18 år.");
+  for (const k of d.excl) R("reject", EXCL[k]);
+  const waistHigh = d.waist !== null && ((d.sex === "kvinna" && d.waist > 88) || (d.sex === "man" && d.waist > 102));
+  const co = d.comorb.length;
+  if (bmi >= 35) {
+    /* uppfyller indikation */
+  } else if (bmi >= 30) {
+    if (!(waistHigh || co > 0)) R("review", "BMI 30 till 34,9 utan ökat midjeomfång eller följdsjukdom. Läkaren avgör under besöket.");
+  } else if (bmi >= 27) {
+    if (co > 0) R("review", "BMI 27 till 29,9 med följdsjukdom. Läkaren avgör under besöket.");
+    else R("reject", "BMI 27 till 29,9 utan följdsjukdom.");
+  } else {
+    R("reject", "BMI under 27.");
+  }
+  for (const k of d.review) R("review", REVIEW[k]);
+  if (d.scoff >= 2) R("review", "Du svarade ja på " + d.scoff + " av 5 frågor om ätbeteende. Läkaren går igenom det med dig.");
+  if (d.age >= 75) R("review", "Du är 75 år eller äldre.");
+  return { level: lv, bmi, reasons };
+}
+//</triage>
+
+// Testlänkar från Stripes sandbox. Byt till skarpa länkar först när verksamheten är registrerad och kontot är aktiverat.
+const LINKS = {
+  start: "https://book.stripe.com/test_5kQfZjdhB1CE1Cj9hGbAs00",
+  sjuk: "https://book.stripe.com/test_14AeVf91l8125SzdxWbAs02",
+  kort: "https://book.stripe.com/test_4gMcN76Tdgxy6WD65ubAs03",
+  jour: "https://book.stripe.com/test_5kQ9AVdhB6WY1Cj9hGbAs04",
+  conc: "https://buy.stripe.com/test_5kQcN77Xhftu2GndxWbAs05"
+};
+const CAL = { vikt:"https://cal.com/daniel-mira-1u9adr/viktbedomning", intyg:"https://cal.com/daniel-mira-1u9adr/sjukintyg", jour:"https://cal.com/daniel-mira-1u9adr/journalgenomgang" };
+const PRICE = { vikt: 795, intyg: 495, kort: 995, jour: 2500, conc: 3000 };
+const W = { service: null, step: "service", result: null };
+
+function checkGroup(host, items, name) {
+  const h = $(host);
+  const entries = Array.isArray(items) ? items.map((t, i) => [String(i), t]) : Object.entries(items);
+  for (const [k, t] of entries) {
+    const lab = document.createElement("label"); lab.className = "chk";
+    const inp = document.createElement("input"); inp.type = "checkbox"; inp.name = name; inp.value = k;
+    const sp = document.createElement("span"); sp.textContent = t;
+    lab.append(inp, sp); h.append(lab);
+  }
+}
+checkGroup("g-comorb", COMORB, "comorb");
+checkGroup("g-excl", EXCL, "excl");
+checkGroup("g-review", REVIEW, "review");
+checkGroup("g-scoff", SCOFF, "scoff");
+
+const num = (id) => { const v = parseFloat(String($(id).value).replace(",", ".")); return isFinite(v) ? v : null; };
+const checked = (name) => [...document.querySelectorAll('input[name="' + name + '"]:checked')].map((i) => i.value);
+function readIntake() {
+  return {
+    sex: $("sex").value, age: num("age"), height: num("height"), weight: num("weight"), waist: num("waist"),
+    comorb: checked("comorb"), excl: checked("excl"), review: checked("review"),
+    scoff: checked("scoff").length, selfharm: $("selfharm").checked
+  };
+}
+function updateBmi() {
+  const h = num("height"), w = num("weight");
+  $("bmiOut").textContent = h && w ? (w / Math.pow(h / 100, 2)).toFixed(1).replace(".", ",") : "–";
+}
+["height", "weight"].forEach((id) => $(id).addEventListener("input", updateBmi));
+
+/* Flöde */
+const ORDER = ["service", "check", "pay"];
+function show(step) {
+  W.step = step;
+  $("w-service").hidden = step !== "service";
+  $("w-check-vikt").hidden = !(step === "check" && W.service === "vikt");
+  $("w-check-intyg").hidden = !(step === "check" && W.service === "intyg");
+  $("w-check-kort").hidden = !(step === "check" && W.service === "kort");
+  $("w-check-jour").hidden = !(step === "check" && W.service === "jour");
+  $("w-check-conc").hidden = !(step === "check" && W.service === "conc");
+  $("w-pay").hidden = step !== "pay";
+  $("w-done").hidden = step !== "done";
+  document.querySelectorAll("#stepper li").forEach((li) => li.classList.toggle("on", li.dataset.s === step));
+  if (step === "pay") preparePay();
+}
+function pick(service) {
+  if (service !== "vikt" && service !== "intyg" && service !== "kort" && service !== "jour" && service !== "conc") { return; }
+  if (W.service !== service) { W.result = null; $("resultBox").hidden = true; $("payMsg").textContent = ""; }
+  W.service = service;
+  show("check");
+}
+function preparePay() {
+  const v = W.service === "vikt";
+  const T = { vikt: "Boka och betala viktbedömning", intyg: "Boka och betala sjukintyg", kort: "Betala för undersökning på plats", jour: "Boka och betala journalgenomgång", conc: "Bli medlem i läkarconcierge" };
+  $("payTitle").textContent = T[W.service];
+  $("subRow").hidden = !v;
+  $("payPlace").hidden = W.service !== "kort";
+  $("timeNote").hidden = W.service === "conc" || W.service === "kort";
+  $("concNote").hidden = W.service !== "conc";
+  updateTotal(); updatePay();
+}
+document.querySelectorAll("[data-pick]").forEach((el) => el.addEventListener("click", () => {
+  const s = el.dataset.pick;
+  if (s) pick(s); else if (W.step === "service") show("service");
+}));
+document.querySelectorAll("[data-back]").forEach((el) => el.addEventListener("click", () => show("service")));
+
+/* Kontroll, viktbedömning */
+const LV = { ok: "Kan vara aktuellt", review: "Läkaren tittar extra", reject: "Passar inte via nätet", akut: "Viktigt" };
+function evaluate() {
+  const r = triage(readIntake());
+  W.result = r;
+  const box = $("result");
+  box.className = "result " + r.level;
+  box.replaceChildren();
+  const pill = document.createElement("span"); pill.className = "pill " + r.level; pill.textContent = LV[r.level];
+  box.append(pill);
+  if (r.bmi) { const b = document.createElement("p"); b.className = "num"; b.textContent = "BMI " + r.bmi.toFixed(1).replace(".", ","); box.append(b); }
+  const msg = document.createElement("p");
+  if (r.level === "akut") msg.textContent = "Det du har svarat är viktigt. Ring 112 om du är i akut fara. Du kan också ringa Självmordslinjen på 90101 eller 1177. Du går inte vidare i bokningen nu, eftersom du kan behöva träffa vården snabbare än vad den här tjänsten kan erbjuda.";
+  else if (r.level === "reject") msg.textContent = "Enligt dina svar kan vi tyvärr inte erbjuda en viktbedömning på distans. Din vårdcentral eller 1177 kan hjälpa dig vidare.";
+  else if (r.level === "review") msg.textContent = "Du kan boka. Läkaren tittar extra på punkterna nedan och avgör sedan under besöket vad som är lämpligt.";
+  else msg.textContent = "Dina svar passar en viktbedömning. Läkaren gör den slutliga bedömningen under besöket.";
+  box.append(msg);
+  if (r.reasons.length) {
+    const ul = document.createElement("ul"); ul.className = "plain";
+    for (const x of r.reasons) { const li = document.createElement("li"); li.textContent = x.text; ul.append(li); }
+    box.append(ul);
+  }
+  const act = $("resultActions"); act.replaceChildren();
+  if (r.level === "ok" || r.level === "review") {
+    const b = document.createElement("button"); b.className = "btn"; b.type = "button"; b.textContent = "Välj tid";
+    b.onclick = () => show("pay"); act.append(b);
+  }
+  $("resultBox").hidden = false;
+}
+$("btnEval").onclick = evaluate;
+
+/* Kontroll, sjukintyg */
+function updateIntyg() { $("btnIntygNext").disabled = !($("i1").checked && $("i2").checked); }
+["i1", "i2"].forEach((id) => $(id).addEventListener("change", updateIntyg));
+$("btnIntygNext").onclick = () => show("pay");
+
+/* Kontroll, körkortsintyg */
+function updateKort() { $("btnKortNext").disabled = !($("k1").checked && $("k2").checked && $("k3").checked); }
+["k1", "k2", "k3"].forEach((id) => $(id).addEventListener("change", updateKort));
+$("btnKortNext").onclick = () => show("pay");
+
+/* Kontroll, journalgenomgång */
+function updateJour() { $("btnJourNext").disabled = !($("j1").checked && $("j2").checked); }
+["j1", "j2"].forEach((id) => $(id).addEventListener("change", updateJour));
+$("btnJourNext").onclick = () => show("pay");
+
+/* Kontroll, läkarconcierge */
+function updateConc() { $("btnConcNext").disabled = !($("m1").checked && $("m2").checked && $("m3").checked); }
+["m1", "m2", "m3"].forEach((id) => $(id).addEventListener("change", updateConc));
+$("btnConcNext").onclick = () => show("pay");
+
+/* Betalning */
+function totalNow() {
+  if (W.service === "intyg") return PRICE.intyg;
+  if (W.service === "kort") return PRICE.kort;
+  if (W.service === "jour") return PRICE.jour;
+  if (W.service === "conc") return PRICE.conc;
+  return PRICE.vikt;
+}
+function updateTotal() { $("total").textContent = fmt(totalNow()) + " kr"; }
+function payRef() {
+  if (W.service === "conc") return "conc-medlem";
+  return W.service + "-" + Date.now().toString(36);
+}
+function payHref() {
+  if (CAL[W.service]) return CAL[W.service];
+  const base = W.service === "intyg" ? LINKS.sjuk : W.service === "kort" ? LINKS.kort : W.service === "jour" ? LINKS.jour : W.service === "conc" ? LINKS.conc : LINKS.start;
+  return base + "?client_reference_id=" + payRef();
+}
+function payOk() {
+  if (!$("c1").checked || !$("c2").checked) return false;
+  if (W.service === "intyg") return $("i1").checked && $("i2").checked;
+  if (W.service === "kort") return $("k1").checked && $("k2").checked && $("k3").checked;
+  if (W.service === "jour") return $("j1").checked && $("j2").checked;
+  if (W.service === "conc") return $("m1").checked && $("m2").checked && $("m3").checked;
+  return !!(W.result && (W.result.level === "ok" || W.result.level === "review"));
+}
+function updatePay() {
+  const a = $("btnPay");
+  a.setAttribute("aria-disabled", String(!payOk()));
+  a.href = payOk() ? payHref() : "#boka";
+  const wrap = $("calWrap"), fr = $("calFrame");
+  if (CAL[W.service]) {
+    const url = CAL[W.service];
+    a.hidden = true;
+    wrap.hidden = !payOk();
+    if (payOk()) {
+      const src = url + "?embed=true&layout=month_view&theme=light";
+      if (fr.dataset.u !== src) { fr.src = src; fr.dataset.u = src; }
+      $("calOpen").href = url;
+    }
+  } else { a.hidden = false; wrap.hidden = true; }
+  a.textContent = CAL[W.service] ? "Välj tid och betala" : (W.service === "kort" ? "Betala med Stripe" : "Betala med Stripe");
+}
+["c1", "c2"].forEach((id) => $(id).addEventListener("change", () => { updateTotal(); updatePay(); }));
+$("btnPay").addEventListener("click", (e) => {
+  if (!payOk()) { e.preventDefault(); $("payMsg").textContent = "Godkänn båda rutorna först."; return; }
+  $("payMsg").textContent = W.service === "conc"
+    ? "Betalningen sker på Stripes sida i en ny flik. Medlemskapet förnyas varje månad tills du säger upp det."
+    : (CAL[W.service] ? "Bokningen öppnas i en ny flik. Välj dag och tid och betala där. Du är bokad först när betalningen gått igenom." : "Betalningen sker på Stripes sida i en ny flik. Tid för undersökningen bokar vi tillsammans efter betalningen.");
+});
+
+window.addEventListener("message", (e) => {
+  let host = ""; try { host = new URL(e.origin).hostname; } catch (x) { return; }
+  if (!/(^|\.)cal\.com$/.test(host)) return;
+  const d = e.data || {};
+  if (d.originator !== "CAL") return;
+  console.log("[Apocura] Cal-meddelande:", JSON.stringify(d).slice(0, 300));
+  const t = String(d.type || d.method || "");
+  if (/bookingSuccessful/i.test(t)) { show("done"); const el = document.getElementById("boka"); if (el) el.scrollIntoView({ behavior: "smooth" }); }
+});
+$("calDone").addEventListener("click", () => show("done"));
+show("service");
+const _s = new URLSearchParams(location.search).get("s");
+if (_s) pick(_s);
+</script>
+<script src="chat.js"></script>
+</body>
+</html>
