@@ -1,6 +1,6 @@
 /* Apocura – stil
    Riktning: en lugn, saklig mottagning. Vit och kall grågrön bas, djup tallgrön som enda färg,
-   serif i rubriker och priser, sans-serif i löptext. Det enda framträdande elementet är
+   Schibsted Grotesk i rubriker och priser, Public Sans i löptext. Det enda framträdande elementet är
    skylten med mottagningstider på startsidan. Allt annat är hårlinjer och luft. */
 :root {
   --bg: #FFFFFF;
@@ -23,7 +23,7 @@
   --ok: #1B6B3F; --ok-soft: #DDEFE3;
   --warn: #7A4F00; --warn-soft: #F7E8C6;
   --bad: #9B2226; --bad-soft: #F6DCDC;
-  --f-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-display: "Schibsted Grotesk", "Public Sans", system-ui, sans-serif;
   --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --r-sm: 6px;
   --r-md: 10px;
@@ -51,7 +51,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
-h1, h2 { font-family: var(--f-display); font-weight: 600; margin: 0; letter-spacing: -0.015em; text-wrap: balance; }
+h1, h2 { font-family: var(--f-display); font-weight: 600; margin: 0; letter-spacing: -0.025em; text-wrap: balance; }
 h1 { font-size: clamp(38px, 5.4vw, 60px); line-height: 1.06; }
 h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.14; }
 h3 { font-family: var(--f-body); font-weight: 600; font-size: 19px; line-height: 1.3; margin: 0; }
@@ -74,7 +74,7 @@ section.s { padding-block: 88px; }
 .top .wrap { display: flex; align-items: center; gap: 32px; min-height: 72px; }
 .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); margin-right: auto; }
 .brand:hover { color: var(--ink); }
-.brand { font-family: var(--f-display); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 25px; letter-spacing: -0.03em; }
 .brandsub { font-family: var(--f-body); font-weight: 500; font-size: 14px; color: var(--muted); letter-spacing: 0; }
 .brand i { display: none; }
 .top nav { display: flex; gap: 28px; }
@@ -111,7 +111,7 @@ nav a[aria-current="page"] { color: var(--primary); text-decoration: underline; 
 .facts li::before { content: ""; position: absolute; left: 2px; top: .42em; width: 11px; height: 6px; border-left: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(-45deg); }
 
 .plate { background: var(--plate); color: var(--plate-ink); border-radius: var(--r-md); padding: 36px 36px 30px; }
-.plate h2 { font-size: 26px; color: inherit; letter-spacing: -0.01em; }
+.plate h2 { font-size: 26px; color: inherit; letter-spacing: -0.02em; }
 .plate dl { margin: 22px 0 0; }
 .plate dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-block: 14px; border-top: 1px solid var(--plate-line); }
 .plate dl div:last-child { border-bottom: 1px solid var(--plate-line); }
@@ -135,7 +135,7 @@ nav a[aria-current="page"] { color: var(--primary); text-decoration: underline; 
 .svc-list li { border-top: 1px solid var(--line); }
 .svc-list li:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
 .svc-list a { display: grid; grid-template-columns: 1fr auto; column-gap: 20px; row-gap: 2px; padding-block: 22px; text-decoration: none; color: var(--ink); }
-.svc-list .nm { font-family: var(--f-display); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.svc-list .nm { font-family: var(--f-display); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; }
 .svc-list .ds { grid-column: 1; color: var(--muted); font-size: 15px; }
 .svc-list .pr { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-weight: 600; text-align: right; white-space: nowrap; }
 .svc-list a:hover .nm { color: var(--primary); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
@@ -149,7 +149,7 @@ nav a[aria-current="page"] { color: var(--primary); text-decoration: underline; 
 .doc-card { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; align-items: start; }
 .doc-photo { position: relative; width: 200px; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; background: var(--primary-soft); display: grid; place-items: center; }
 .doc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.doc-fallback { font-family: var(--f-display); font-size: 56px; font-weight: 600; color: var(--primary); letter-spacing: .02em; }
+.doc-fallback { font-family: var(--f-display); font-size: 56px; font-weight: 600; color: var(--primary); letter-spacing: -0.01em; }
 .doc-text { display: flex; flex-direction: column; gap: 14px; max-width: 64ch; }
 .doc-text .role { font-size: 16px; color: var(--muted); margin-top: -6px; }
 .doc-text h2 { margin: 0; }
@@ -171,7 +171,7 @@ nav a[aria-current="page"] { color: var(--primary); text-decoration: underline; 
 .svcs { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
 @media (min-width: 760px) { .svcs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .svc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 32px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.svc h3 { font-family: var(--f-display); font-size: 26px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+.svc h3 { font-family: var(--f-display); font-size: 25px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
 .svc.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; background: var(--primary-soft); border-color: transparent; }
 .svc.wide .eyebrow { margin: 0 0 6px; }
 .svc.wide h3 { margin-bottom: 10px; }
@@ -183,7 +183,7 @@ nav a[aria-current="page"] { color: var(--primary); text-decoration: underline; 
 .svc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
 .svc li, .tick li { padding-left: 26px; position: relative; font-size: 16px; }
 .svc li::before, .tick li::before { content: ""; position: absolute; left: 3px; top: .5em; width: 11px; height: 6px; border-left: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(-45deg); }
-.svc .price { font-family: var(--f-display); font-size: 34px; font-weight: 600; margin-top: auto; padding-top: 8px; letter-spacing: -0.01em; }
+.svc .price { font-family: var(--f-display); font-size: 34px; font-weight: 600; margin-top: auto; padding-top: 8px; letter-spacing: -0.02em; }
 .svc .price small { font-family: var(--f-body); font-size: 15px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 .svc .btn { align-self: stretch; }
 
