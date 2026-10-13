@@ -1,3 +1,5 @@
+/* Meny på mobil */
+(function(){const b=document.querySelector(".menu-btn"),top=document.querySelector(".top");if(!b||!top)return;b.addEventListener("click",()=>{const o=top.classList.toggle("open");b.setAttribute("aria-expanded",String(o));b.textContent=o?"Stäng":"Meny";});})();
 (function(){
 const CONTACT_EMAIL = ""; // Fyll i adressen som förfrågningar och överlämningar ska skickas till
 const $=(id)=>document.getElementById(id);
@@ -16,7 +18,7 @@ const KB=[
  {k:["concierge","medlem","månad","abonnemang","prenumeration"],a:"Läkarconcierge (3 000 kr per månad) ger dig direktkontakt med läkare via säker chatt med svar inom en arbetsdag och ett videobesök på upp till 30 minuter varje månad. Ingen bindningstid, du säger upp när du vill. Ingår inte akut vård, hembesök, läkemedel eller intyg."},
  {k:["match","idrott","evenemang","turnering"],a:"Matchläkare kostar 1 400 kr per timme. Läkaren är på plats under hela uppdraget och bedömer och tar hand om skador och akuta tillstånd. Skicka en förfrågan med datum, plats och antal timmar, så bekräftar vi. Du betalar inget förrän uppdraget är bekräftat.",btn:["Skicka förfrågan om matchläkare","tjanster.html#matchlakare"]},
  {k:["lagläkare","lag ","förening","laget","avtal","villkor"],a:"Lagläkare är en namngiven läkare som följer ert lag över tid. Omfattning och villkor bestämmer vi tillsammans. Beskriv vad ni behöver så återkommer vi med ett förslag.",btn:["Diskutera villkor för lagläkare","tjanster.html#lagLakare"]},
- {k:["boka","bokning","tid","när","ledig"],a:"Så bokar du: 1) välj tjänst, 2) svara på några korta frågor, 3) betala, och 4) välj en ledig tid direkt efter betalningen. Du är bokad först när du har valt en tid och fått bekräftelse på e-post.",btn:["Gå till bokningen","boka.html"]},
+ {k:["boka","bokning","tid","när","ledig"],a:"Så bokar du: 1) välj tjänst, 2) svara på några korta frågor, 3) välj en ledig tid och slutför bokningen. Du får en bekräftelse med videolänk på e-post.",btn:["Gå till bokningen","boka.html"]},
  {k:["recept","läkemedel","medicin","ozempic","wegovy"],a:"Läkaren gör alltid en egen medicinsk bedömning och avgör om recept är lämpligt. Det går inte att lova ett visst läkemedel i förväg, och priset gäller bedömningen."},
  {k:["video","hur fungerar","hur går","digital"],a:"Videobesöket sker i en länk du får i bekräftelsen, direkt i webbläsaren eller mobilen. Du behöver kamera och mikrofon. Läkaren pratar med dig och gör bedömningen, och allt annat sköts automatiskt före och efter besöket."},
  {k:["vem","läkare","legitimerad","daniel"],a:"Du träffar alltid läkaren själv. Daniel Mira är legitimerad läkare och specialistutbildar sig i allmänmedicin. Läs mer under rubriken Läkaren på sidan.",btn:["Läs om läkaren","lakaren.html"]},

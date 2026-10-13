@@ -8,15 +8,19 @@
 <meta property="og:title" content="Apocura privatläkartjänster">
 <meta property="og:description" content="Träffa en läkare online, när det passar dig. Viktbedömning, sjukintyg, körkortsintyg, journalgenomgång och läkarconcierge.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#2A7F73">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#1D5047">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D5047'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='600' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span><i aria-hidden="true"></i></a>
-    <nav aria-label="Sidor"><a href="tjanster.html">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a></nav>
+    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Meny</button>
+    <nav id="nav" aria-label="Sidor"><a href="tjanster.html">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a></nav>
     <a class="btn sm" href="boka.html">Boka tid</a>
   </div>
 </header>
@@ -25,92 +29,69 @@
   <section class="hero">
     <div class="wrap">
       <div class="copy">
-        <p class="eyebrow">Läkarmottagning</p>
         <h1>Träffa en läkare online, när det passar dig.</h1>
-        <p class="lead">Boka videobesök på kvällar och söndagar. Fast pris, tydlig bekräftelse och ingen resa. Viktbedömning, sjukintyg och journalgenomgång, samt körkortsintyg på mottagning.</p>
+        <p class="lead">Videobesök på kvällar och söndagar med legitimerad läkare. Du ser priset innan du bokar och får bekräftelsen direkt.</p>
         <div class="row">
           <a class="btn" href="boka.html">Boka tid</a>
-          <a class="btn alt" href="tjanster.html">Se alla tjänster och priser</a>
+          <a class="btn alt" href="tjanster.html">Tjänster och priser</a>
         </div>
-        <div class="chips">
-          <span class="chip">Legitimerad läkare</span>
-          <span class="chip">Kvällar och söndagar</span><span class="chip">Fast pris</span>
-          <span class="chip">Video eller på plats</span>
-        </div>
+        <ul class="facts">
+          <li>Legitimerad läkare</li>
+          <li>Fast pris</li>
+          <li>Video eller på mottagningen</li>
+        </ul>
       </div>
-      <div class="visit" aria-hidden="true">
-        <svg viewBox="0 0 300 190" fill="none" role="img" aria-label="Illustration: läkare och patient i ett videosamtal">
-          <rect x="6" y="6" width="288" height="178" rx="18" fill="#FFFFFF" stroke="#E3DACD" stroke-width="2"/>
-          <rect x="16" y="16" width="134" height="158" rx="12" fill="#DDF0EA"/>
-          <rect x="156" y="16" width="128" height="158" rx="12" fill="#FDE8DC"/>
-          <!-- läkare -->
-          <path d="M26 174c2-34 20-50 57-50s55 16 57 50z" fill="#FFFFFF"/>
-          <path d="M64 124l19 26 19-26" fill="#DDF0EA" stroke="#2A7F73" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M66 128c-6 14-4 30 8 34" stroke="#2A7F73" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="74" cy="164" r="5" fill="#2A7F73"/>
-          <rect x="74" y="104" width="18" height="22" rx="8" fill="#E5B08F"/>
-          <ellipse cx="83" cy="88" rx="25" ry="28" fill="#E5B08F"/>
-          <path d="M57 84c-2-24 12-36 28-36 17 0 29 12 25 36-6-10-14-15-26-15-12 0-21 5-27 15z" fill="#3B2A22"/>
-          <circle cx="74" cy="92" r="2.6" fill="#11261F"/><circle cx="93" cy="92" r="2.6" fill="#11261F"/>
-          <path d="M75 102c5 5 12 5 17 0" stroke="#11261F" stroke-width="2.6" stroke-linecap="round"/>
-          <!-- patient -->
-          <path d="M164 174c2-32 20-46 56-46s54 14 56 46z" fill="#2A7F73"/>
-          <rect x="211" y="106" width="18" height="24" rx="8" fill="#9A6444"/>
-          <ellipse cx="220" cy="90" rx="24" ry="27" fill="#9A6444"/>
-          <path d="M195 88c-4-26 10-38 26-38 17 0 30 12 24 38-3-9-9-18-24-18-14 0-22 8-26 18z" fill="#1B1511"/>
-          <circle cx="211" cy="94" r="2.6" fill="#11261F"/><circle cx="230" cy="94" r="2.6" fill="#11261F"/>
-          <path d="M212 104c5 5 12 5 17 0" stroke="#11261F" stroke-width="2.6" stroke-linecap="round"/>
-        </svg>
-        <div class="vcard">
-          <b>Ditt videobesök</b>
-          <span class="t" id="heroTime">Videobesök · 30 min</span>
-          <span class="tag">Tid och betalning i en bokning</span>
-        </div>
-      </div>
+      <aside class="plate" aria-labelledby="plateH">
+        <h2 id="plateH">Mottagningstider</h2>
+        <dl>
+          <div><dt>Måndag till fredag</dt><dd>18.00–21.00</dd></div>
+          <div><dt>Söndag</dt><dd>10.00–19.00</dd></div>
+        </dl>
+        <p>Videobesök i bokad tid. Läkarintyg för körkort görs på mottagningen.</p>
+        <div class="plate-foot"><span>Leg. läkare Daniel Mira</span><a href="boka.html">Se lediga tider</a></div>
+      </aside>
     </div>
   </section>
 
   <section class="s" id="oversikt">
     <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Tjänster</p>
-        <h2>Det här kan vi hjälpa dig med</h2>
+      <div class="head split">
+        <h2>Tjänster och priser</h2>
+        <a href="tjanster.html">Se vad som ingår i varje tjänst</a>
       </div>
-      <div class="mini">
-        <a href="tjanster.html"><b>Viktbedömning</b><span class="pr num">795 kr</span><span class="d">Medicinsk bedömning via video, 30 minuter.</span></a>
-        <a href="tjanster.html"><b>Sjukintyg</b><span class="pr num">495 kr</span><span class="d">Läkarbedömning via video, 20 minuter.</span></a>
-        <a href="tjanster.html"><b>Körkortsintyg</b><span class="pr num">995 kr</span><span class="d">Undersökning på plats, högre behörighet.</span></a>
-        <a href="tjanster.html"><b>Journalgenomgång</b><span class="pr num">2 500 kr per timme</span><span class="d">Läkaren förklarar din journal.</span></a>
-        <a href="tjanster.html"><b>Läkarconcierge</b><span class="pr num">3 000 kr per månad</span><span class="d">Din egen läkare, chatt och ett videobesök varje månad.</span></a>
-        <a href="tjanster.html#matchlakare"><b>Match- och lagläkare</b><span class="pr num">1 400 kr per timme</span><span class="d">Läkare på plats för idrott och förening.</span></a>
-      </div>
-      <p style="margin-top:22px"><a class="btn alt" href="tjanster.html">Se allt som ingår och priserna</a></p>
+      <ul class="svc-list">
+        <li><a href="tjanster.html#vikt"><span class="nm">Viktbedömning</span><span class="ds">Videobesök, 30 minuter</span><span class="pr num">795 kr</span></a></li>
+        <li><a href="tjanster.html#sjukintyg"><span class="nm">Sjukintyg</span><span class="ds">Videobesök, 20 minuter</span><span class="pr num">495 kr</span></a></li>
+        <li><a href="tjanster.html#korkort"><span class="nm">Läkarintyg för körkort</span><span class="ds">Undersökning på mottagningen</span><span class="pr num">995 kr</span></a></li>
+        <li><a href="tjanster.html#journal"><span class="nm">Journalgenomgång</span><span class="ds">Videobesök, 60 minuter</span><span class="pr num">2 500 kr</span></a></li>
+        <li><a href="tjanster.html#concierge"><span class="nm">Läkarconcierge</span><span class="ds">Chatt och ett videobesök varje månad</span><span class="pr num">3 000 kr/mån</span></a></li>
+        <li><a href="tjanster.html#matchlakare"><span class="nm">Match- och lagläkare</span><span class="ds">Läkare på plats för idrott och förening</span><span class="pr num">1 400 kr/tim</span></a></li>
+      </ul>
     </div>
   </section>
 
   <section class="s band">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Därför Apocura</p>
         <h2>Läkartid som passar ditt liv</h2>
       </div>
       <div class="cols">
         <div><h3>Kvällar och söndagar</h3><p class="muted">Boka en tid efter jobbet eller på söndagen. Du väljer själv tid direkt i kalendern.</p></div>
-        <div><h3>Fast pris, inga överraskningar</h3><p class="muted">Du ser priset innan du bokar. Ingen faktura i efterhand och inga dolda avgifter.</p></div>
-        <div><h3>Direkt med läkaren</h3><p class="muted">Du pratar med legitimerad läkare via video, utan mellanhänder. Resan till mottagningen och väntrummet slipper du.</p></div>
+        <div><h3>Fast pris</h3><p class="muted">Du ser priset innan du bokar. Ingen faktura i efterhand och inga dolda avgifter.</p></div>
+        <div><h3>Direkt med läkaren</h3><p class="muted">Du pratar med legitimerad läkare via video, utan mellanhänder, och slipper resan och väntrummet.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="s band">
+  <section class="s">
     <div class="wrap">
       <div class="doc-card">
         <div class="doc-photo"><span class="doc-fallback" aria-hidden="true">DM</span></div>
-        <div>
-          <p class="eyebrow">Läkaren</p>
-          <h2>Möt din läkare</h2>
-          <p class="muted">Daniel Mira är legitimerad läkare och specialistutbildar sig i allmänmedicin. Han arbetar i primärvård och på närakut, och genomför besöken själv.</p>
-          <p><a class="btn alt" href="lakaren.html">Läs om läkaren</a></p>
+        <div class="doc-text">
+          <h2>Daniel Mira</h2>
+          <p class="role">Legitimerad läkare, specialistutbildning i allmänmedicin</p>
+          <p class="muted">Daniel arbetar i primärvård och på närakut och genomför besöken hos Apocura själv.</p>
+          <p><a class="btn alt" href="lakaren.html">Läs mer om läkaren</a></p>
         </div>
       </div>
     </div>
@@ -118,9 +99,11 @@
 
   <section class="s ctaband">
     <div class="wrap">
-      <h2>Boka din läkartid på några minuter</h2>
-      <p class="lead">Välj tjänst, välj tid och få bekräftelse direkt. Du ser priset innan du bokar.</p>
-      <div class="row"><a class="btn" href="boka.html">Boka tid</a><a class="btn alt" href="fragor.html">Läs vanliga frågor</a></div>
+      <div>
+        <h2>Boka din läkartid på några minuter</h2>
+        <p class="lead">Välj tjänst och tid, och få bekräftelsen direkt på e-post.</p>
+      </div>
+      <div class="row"><a class="btn" href="boka.html">Boka tid</a><a class="btn alt" href="fragor.html">Vanliga frågor</a></div>
     </div>
   </section>
 </main>
@@ -135,11 +118,16 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
-    <nav class="foot-nav" aria-label="Sidor"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a><a href="boka.html">Boka tid</a></nav>
-    <p>Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p>
-    <p>Vårdgivare: Apocura privatläkartjänster, organisationsnummer 559263-8356 · Ansvarig verksamhetschef: [namn, fylls i före publicering]</p>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <b>Apocura</b>
+      <p>Privatläkartjänster</p>
+    </div>
+    <nav class="foot-nav" aria-label="Sidfot"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Vanliga frågor</a><a href="boka.html">Boka tid</a></nav>
+    <div class="foot-info">
+      <p><strong>Vid akut fara, ring 112.</strong> För sjukvårdsrådgivning, ring 1177.</p>
+      <p>Vårdgivare: Apocura privatläkartjänster<br>Organisationsnummer 559263-8356<br>Verksamhetschef: [namn, fylls i före publicering]</p>
+    </div>
   </div>
 </footer>
 

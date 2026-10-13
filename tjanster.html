@@ -8,15 +8,19 @@
 <meta property="og:title" content="Tjänster och priser | Apocura">
 <meta property="og:description" content="Alla tjänster med vad som ingår och fast pris: viktbedömning, sjukintyg, körkortsintyg, journalgenomgång, läkarconcierge, matchläkare och lagläkare.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#2A7F73">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#1D5047">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D5047'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='600' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span><i aria-hidden="true"></i></a>
-    <nav aria-label="Sidor"><a href="tjanster.html" aria-current="page">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a></nav>
+    <a class="brand" href="./">Apocura <span class="brandsub">privatläkartjänster</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Meny</button>
+    <nav id="nav" aria-label="Sidor"><a href="tjanster.html" aria-current="page">Tjänster</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a></nav>
     <a class="btn sm" href="boka.html">Boka tid</a>
   </div>
 </header>
@@ -25,11 +29,10 @@
   <section class="s" id="tjanster">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Tjänster</p>
-        <h2>Våra tjänster, med fast pris</h2>
+        <h1>Våra tjänster, med fast pris</h1>
       </div>
       <div class="svcs">
-        <article class="svc">
+        <article class="svc" id="vikt">
           <h3>Viktbedömning</h3>
           <p class="muted">Medicinsk bedömning vid övervikt och fetma. Du går igenom din hälsa och tidigare försök, och får veta vilka behandlingar som kan passa dig.</p>
           <ul>
@@ -37,13 +40,13 @@
             <li>Genomgång av din hälsa, vikt, sjukdomar och läkemedel</li>
             <li>Medicinsk bedömning av om läkemedelsbehandling är lämplig</li>
             <li>Plan och råd, och recept om läkaren bedömer att det är lämpligt</li>
-            <li>Samma pris oavsett vad läkaren kommer fram till</li>
+            <li>Fast pris för bedömningen</li>
           </ul>
           <p class="notinc">Ingår inte: läkemedlet (betalas på apotek), provtagning och uppföljning. Efter bedömningen går läkaren igenom om uppföljning passar dig. Den är frivillig och kostar 399 kr per månad, utan bindningstid.</p>
           <p class="price num">795 kr <small>startbesök</small></p>
           <a class="btn" href="boka.html?s=vikt">Boka viktbedömning</a>
         </article>
-        <article class="svc">
+        <article class="svc" id="sjukintyg">
           <h3>Sjukintyg</h3>
           <p class="muted">Läkarbedömning när du behöver ett intyg för sjukfrånvaro. Läkaren bedömer din arbetsförmåga utifrån vad som framkommer vid besöket.</p>
           <ul>
@@ -56,7 +59,7 @@
           <p class="price num">495 kr <small>bedömning</small></p>
           <a class="btn" href="boka.html?s=intyg">Boka sjukintyg</a>
         </article>
-        <article class="svc">
+        <article class="svc" id="korkort">
           <h3>Läkarintyg för körkort</h3>
           <p class="muted">Läkarundersökning och intyg för högre körkortsbehörighet, till exempel lastbil och buss, vid förlängning från 45 års ålder och vid första ansökan.</p>
           <ul>
@@ -69,7 +72,7 @@
           <p class="price num">995 kr <small>undersökning</small></p>
           <a class="btn" href="boka.html?s=kort">Boka körkortsintyg</a>
         </article>
-        <article class="svc">
+        <article class="svc" id="journal">
           <h3>Journalgenomgång</h3>
           <p class="muted">En läkare går igenom din journal och förklarar dina diagnoser, provsvar och behandlingar på ett sätt som är lätt att förstå.</p>
           <ul>
@@ -81,7 +84,7 @@
           <p class="price num">2 500 kr <small>per timme</small></p>
           <a class="btn" href="boka.html?s=jour">Boka journalgenomgång</a>
         </article>
-        <article class="svc wide">
+        <article class="svc wide" id="concierge">
           <div>
             <p class="eyebrow">Medlemskap</p>
             <h3>Läkarconcierge</h3>
@@ -132,9 +135,8 @@
   <section class="s" id="priser">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Priser</p>
-        <h2>Priset står här, inte efter besöket</h2>
-        <p class="lead">Priset gäller läkarens tid och bedömning. Det är detsamma oavsett om du får recept eller intyg.</p>
+        <h2>Prislista</h2>
+        <p class="lead">Priset gäller läkarens tid och bedömning.</p>
       </div>
       <ul class="prices">
         <li><div><b>Startbesök, viktbedömning</b><p class="d">Videobesök, 30 minuter. Medicinsk bedömning, plan och råd, och recept om läkaren bedömer det lämpligt.</p></div><span class="p num">795 kr</span></li>
@@ -178,11 +180,16 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <b style="color:var(--ink)">Apocura privatläkartjänster</b>
-    <nav class="foot-nav" aria-label="Sidor"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Frågor</a><a href="boka.html">Boka tid</a></nav>
-    <p>Vid akut fara ring 112. För sjukvårdsrådgivning ring 1177.</p>
-    <p>Vårdgivare: Apocura privatläkartjänster, organisationsnummer 559263-8356 · Ansvarig verksamhetschef: [namn, fylls i före publicering]</p>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <b>Apocura</b>
+      <p>Privatläkartjänster</p>
+    </div>
+    <nav class="foot-nav" aria-label="Sidfot"><a href="tjanster.html">Tjänster och priser</a><a href="sa-fungerar-det.html">Så fungerar det</a><a href="lakaren.html">Läkaren</a><a href="fragor.html">Vanliga frågor</a><a href="boka.html">Boka tid</a></nav>
+    <div class="foot-info">
+      <p><strong>Vid akut fara, ring 112.</strong> För sjukvårdsrådgivning, ring 1177.</p>
+      <p>Vårdgivare: Apocura privatläkartjänster<br>Organisationsnummer 559263-8356<br>Verksamhetschef: [namn, fylls i före publicering]</p>
+    </div>
   </div>
 </footer>
 
