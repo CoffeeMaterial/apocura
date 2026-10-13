@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Välj typsnitt | Apocura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Schibsted+Grotesk:wght@500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.opts { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); }
+.opt { border: 1px solid var(--line); border-radius: var(--r-md); padding: 28px; display: flex; flex-direction: column; gap: 18px; background: var(--surface); }
+.opt .tag { font-size: 14px; font-weight: 600; color: var(--primary); }
+.opt .why { font-size: 15px; color: var(--muted); }
+.opt .demo { border-top: 1px solid var(--line); padding-top: 20px; display: flex; flex-direction: column; gap: 16px; }
+.opt .b { font-size: 26px; font-weight: 600; }
+.opt h2 { font-size: clamp(30px, 3.4vw, 40px); line-height: 1.1; }
+.opt .rowp { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 14px; }
+.opt .nm { font-size: 22px; font-weight: 600; }
+.opt .pr { font-size: 24px; font-weight: 600; }
+.f-serif .x { font-family: "Source Serif 4", Georgia, serif; letter-spacing: -0.015em; }
+.f-grotesk .x { font-family: "Schibsted Grotesk", system-ui, sans-serif; letter-spacing: -0.025em; }
+.f-sans .x { font-family: "Public Sans", system-ui, sans-serif; letter-spacing: -0.025em; }
+.f-newsreader .x { font-family: "Newsreader", Georgia, serif; letter-spacing: -0.01em; }
+</style>
+</head>
+<body>
+<main>
+  <section class="s">
+    <div class="wrap">
+      <div class="head">
+        <h1 style="font-family:var(--f-body);letter-spacing:-0.02em">Välj typsnitt för rubrikerna</h1>
+        <p class="lead">Brödtexten är densamma i alla fyra. Klicka på "Visa hela sidan" för att bläddra runt på hemsidan med det typsnittet. Valet gäller bara i din webbläsare tills du bestämmer dig.</p>
+      </div>
+      <div class="opts">
+        <article class="opt f-serif">
+          <p class="tag">A. Nuvarande: Source Serif</p>
+          <p class="why">Klassisk serif. Ger ett akademiskt, traditionellt intryck.</p>
+          <div class="demo">
+            <span class="b x">Apocura</span>
+            <h2 class="x">Träffa en läkare online, när det passar dig.</h2>
+            <p class="muted">Videobesök på kvällar och söndagar med legitimerad läkare.</p>
+            <div class="rowp"><span class="nm x">Sjukintyg</span><span class="pr x">495 kr</span></div>
+          </div>
+          <p><a class="btn alt" href="index.html?font=serif">Visa hela sidan</a></p>
+        </article>
+        <article class="opt f-grotesk">
+          <p class="tag">B. Schibsted Grotesk</p>
+          <p class="why">Modern nordisk sans-serif med lite karaktär. Saklig men inte anonym.</p>
+          <div class="demo">
+            <span class="b x">Apocura</span>
+            <h2 class="x">Träffa en läkare online, när det passar dig.</h2>
+            <p class="muted">Videobesök på kvällar och söndagar med legitimerad läkare.</p>
+            <div class="rowp"><span class="nm x">Sjukintyg</span><span class="pr x">495 kr</span></div>
+          </div>
+          <p><a class="btn alt" href="index.html?font=grotesk">Visa hela sidan</a></p>
+        </article>
+        <article class="opt f-sans">
+          <p class="tag">C. Public Sans, samma som brödtexten</p>
+          <p class="why">Ett enda typsnitt på hela sidan. Neutralt och myndighetslikt, i stil med 1177.</p>
+          <div class="demo">
+            <span class="b x">Apocura</span>
+            <h2 class="x">Träffa en läkare online, när det passar dig.</h2>
+            <p class="muted">Videobesök på kvällar och söndagar med legitimerad läkare.</p>
+            <div class="rowp"><span class="nm x">Sjukintyg</span><span class="pr x">495 kr</span></div>
+          </div>
+          <p><a class="btn alt" href="index.html?font=sans">Visa hela sidan</a></p>
+        </article>
+        <article class="opt f-newsreader">
+          <p class="tag">D. Newsreader</p>
+          <p class="why">Mjukare och modernare serif än A. Elegant, mindre stel.</p>
+          <div class="demo">
+            <span class="b x">Apocura</span>
+            <h2 class="x">Träffa en läkare online, när det passar dig.</h2>
+            <p class="muted">Videobesök på kvällar och söndagar med legitimerad läkare.</p>
+            <div class="rowp"><span class="nm x">Sjukintyg</span><span class="pr x">495 kr</span></div>
+          </div>
+          <p><a class="btn alt" href="index.html?font=newsreader">Visa hela sidan</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

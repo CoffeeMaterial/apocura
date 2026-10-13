@@ -1,3 +1,22 @@
+/* Förhandsvisning av rubriktypsnitt (?font=...), används av typsnitt.html */
+(function () {
+  const F = {
+    grotesk: { css: "Schibsted+Grotesk:wght@500;600;700", fam: '"Schibsted Grotesk", system-ui, sans-serif', ls: "-0.025em" },
+    sans: { css: "", fam: 'var(--f-body)', ls: "-0.025em" },
+    newsreader: { css: "Newsreader:opsz,wght@6..72,500;6..72,600", fam: '"Newsreader", Georgia, serif', ls: "-0.01em" }
+  };
+  let k = new URLSearchParams(location.search).get("font");
+  try { if (k === "serif") { sessionStorage.removeItem("apoFont"); k = null; } else if (k) sessionStorage.setItem("apoFont", k); else k = sessionStorage.getItem("apoFont"); } catch (e) {}
+  const f = F[k];
+  if (!f) return;
+  if (f.css) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?family=" + f.css + "&display=swap"; document.head.append(l); }
+  const r = document.documentElement.style;
+  r.setProperty("--f-display", f.fam);
+  const s = document.createElement("style");
+  s.textContent = "h1,h2,.brand,.svc-list .nm,.svc h3,.svc .price,.prices .p,.pick b,.sum b,.plate dd{letter-spacing:" + f.ls + "}";
+  document.head.append(s);
+})();
+
 /* Meny på mobil */
 (function () {
   const b = document.querySelector(".menu-btn"), top = document.querySelector(".top");
