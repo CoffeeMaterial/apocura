@@ -139,6 +139,7 @@
           </div>
           <div id="calWrap" hidden>
             <iframe id="calFrame" title="Välj tid och betala" loading="lazy" allow="payment"></iframe>
+            <p class="muted small" id="calPayNote" hidden><b>Tiden är reserverad.</b> Slutför betalningen i rutan ovan. Du är bokad först när betalningen är genomförd.</p>
             <p class="muted small">Har du fått bekräftelsen på e-post? <button class="btn alt sm" type="button" id="calDone">Jag är klar med bokningen</button></p>
             <p class="muted small">Fungerar bokningen inte här? <a id="calOpen" href="#boka" target="_blank" rel="noopener">Öppna den i en ny flik</a>.</p>
           </div>
@@ -436,7 +437,14 @@ window.addEventListener("message", (e) => {
   if (d.originator !== "CAL") return;
   console.log("[Apocura] Cal-meddelande:", JSON.stringify(d).slice(0, 300));
   const t = String(d.type || d.method || "");
-  if (/bookingSuccessful/i.test(t)) { show("done"); const el = document.getElementById("boka"); if (el) el.scrollIntoView({ behavior: "smooth" }); }
+  if (/bookingSuccessful/i.test(t)) {
+    // Vid betald bokning skickar Cal.com händelsen redan när tiden är reserverad,
+    // före betalningen. Då ska vi stanna kvar tills betalningen är klar.
+    const raw = JSON.stringify(d);
+    const payPending = /paymentUid|paymentRequired|requiresPayment|"paid":false|payment_required|\/payment\//i.test(raw);
+    if (payPending) { const n = document.getElementById("calPayNote"); if (n) n.hidden = false; return; }
+    show("done"); const el = document.getElementById("boka"); if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
 });
 $("calDone").addEventListener("click", () => show("done"));
 show("service");
